@@ -1,6 +1,7 @@
-// 铁律一验证：V2（唯一口径）RAW求和+通道封顶须与total一致
+// 铁律一验证：V2.4（唯一口径）RAW求和+通道封顶须与total一致
 // RAW 结构(11字段,纯数据): [code,name,type,board,reason, delisted(5), note(6), mkt_cap(7), mkt_str(8), prev_close(9), flags(10)]
-// V2RAW 结构: [code,name,type,board, C1..H1(12维, idx4-15), delisted(16), note(17), controller(18), controller_cat(19), total(20)]
+// V2RAW 结构(v2.4): [code,name,type,board, A1..B2(10主维度 idx4-13), F1附加(14),
+//                    base主分(15), delisted(16), note(17), controller(18), controller_cat(19), total(20)]
 const fs = require('fs');
 const html = fs.readFileSync('baokeng-rank.html', 'utf8');
 
@@ -14,18 +15,31 @@ function extractArray(name) {
 const RAW = extractArray('RAW');
 const V2RAW = extractArray('V2RAW');
 
+// v2.4 总分计算：10主维度求和→闸门封顶→+F1附加
+function calc(r) {
+  let base = r.slice(4, 14).reduce((a, b) => a + b, 0);  // A1..B2 十主维度
+  if (r[8] === 0) base = Math.min(base, 55);   // C1=0 (idx8)
+  if (r[13] === 0) base = Math.min(base, 55);  // B2=0 (idx13)
+  if (r[12] === 0) base = Math.min(base, 33);  // B1=0 (idx12)
+  return base + r[14];  // +F1附加
+}
+function lvl(s) { return s > 77 ? 'A' : s > 56 ? 'B' : s > 33 ? 'C' : 'D'; }
+
 let bad1 = 0, bad2 = 0, mismatch = 0;
 RAW.forEach(r => {
   if (r.length !== 11) { bad1++; console.log('RAW bad row len', r[0], r.length); }
   if (typeof r[5] !== 'boolean') { bad1++; console.log('RAW delisted not bool', r[0]); }
 });
 V2RAW.forEach(r => {
-  let s = r.slice(4, 16).reduce((a, b) => a + b, 0);
-  if (r[4] === 0) s = Math.min(s, 50);
-  if (r[13] === 0) s = Math.min(s, 50);
-  if (r[12] === 0) s = Math.min(s, 30);
+  if (r.length !== 21) { bad1++; console.log('V2 bad row len', r[0], r.length); }
+  const s = calc(r);
   const t = r[20];
   if (s !== t) { bad2++; console.log('V2 sum!=total', r[0], 'sum=', s, 'total=', t); }
+  let chkBase = r.slice(4, 14).reduce((a, b) => a + b, 0);
+  if (r[8] === 0) chkBase = Math.min(chkBase, 55);
+  if (r[13] === 0) chkBase = Math.min(chkBase, 55);
+  if (r[12] === 0) chkBase = Math.min(chkBase, 33);
+  if (r[15] !== chkBase) { console.log('V2 base mismatch', r[0], 'base field=', r[15], 'calc=', chkBase); }
 });
 const c1 = new Set(RAW.map(r => r[0])), c2 = new Set(V2RAW.map(r => r[0]));
 c1.forEach(c => { if (!c2.has(c)) mismatch++; });
@@ -36,18 +50,19 @@ console.log('RAW bad rows:', bad1, '| V2 sum!=total:', bad2, '| V2 missing codes
 const lv = { A: 0, B: 0, C: 0, D: 0 };
 V2RAW.forEach(r => {
   if (r[16]) return;
-  let s = r.slice(4, 16).reduce((a, b) => a + b, 0);
-  if (r[4] === 0) s = Math.min(s, 50);
-  if (r[13] === 0) s = Math.min(s, 50);
-  if (r[12] === 0) s = Math.min(s, 30);
-  lv[s > 70 ? 'A' : s > 50 ? 'B' : s > 30 ? 'C' : 'D']++;
+  lv[lvl(calc(r))]++;
 });
 console.log('V2 active level dist:', JSON.stringify(lv));
 
+// F1附加命中统计
+const bonusHit = V2RAW.filter(r => r[14] > 0).length;
+console.log('F1 bonus hits:', bonusHit, '/', V2RAW.length);
+
 // 莫高原样核对
 const mg = V2RAW.find(r => r[0] === '600543');
-const mgs = mg.slice(4, 16).reduce((a, b) => a + b, 0);
-console.log('莫高V2 sum=' + mgs, '| total=' + mg[20], '| level=' + (mgs > 70 ? 'A' : mgs > 50 ? 'B' : mgs > 30 ? 'C' : 'D'), '| 实控人=' + mg[18], '| 分类=' + mg[19]);
+const mgs = calc(mg);
+console.log('莫高V2 sum=' + mgs, '| total=' + mg[20], '| level=' + lvl(mgs),
+  '| base=' + mg[15], '| F1=' + mg[14], '| 实控人=' + mg[18], '| 分类=' + mg[19]);
 
 // JS 语法检查
 const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];

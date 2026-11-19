@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""生成公众号竖版长图HTML（750px宽）——保壳风云榜V2（十二维合规口径）"""
+"""生成公众号竖版长图HTML（750px宽）——保壳风云榜V2.4（十主维度100分+F1附加10分=110）"""
 import json, math, html
 
 BASE = "C:/Users/xiaot/WorkBuddy/2026-05-16-task-2"
@@ -94,7 +94,7 @@ def table_block(title, sub, rows_data, extra_fn, extra_label):
 
 
 # ---------- 等级分布条 ----------
-lv_desc = {"A": "退市风险相对较低（>70）", "B": "中等风险（51-70）", "C": "风险较高（31-50）", "D": "退市风险极高（≤30）"}
+lv_desc = {"A": "退市风险相对较低（>77）", "B": "中等风险（56-77）", "C": "风险较高（33-55）", "D": "退市风险极高（≤33）"}
 lv_colors = {"A": "#2E7D32", "B": "#639922", "C": "#E8920A", "D": "#C62828"}
 dist_rows = "\n".join(
     f'''<div class="dist"><span class="dl" style="background:{lv_colors[k]}">{k}</span>
@@ -103,11 +103,11 @@ dist_rows = "\n".join(
     for k in "ABCD")
 
 # ---------- 五通道权重 ----------
-chans = [("财务红线", 34, "净资产·扣非主营·扣非盈利·现金流"),
-         ("监管类", 22, "立案造假·审计意见"),
-         ("股东实力", 18, "实控人·质押"),
-         ("市场类", 16, "面值·壳价值"),
-         ("纾困与司法", 10, "重组纾困·司法")]
+chans = [("财务红线", 40, "净资产·扣非主营·扣非盈利·负债"),
+         ("监管类", 24, "立案/司法·审计/内控"),
+         ("控制权", 18, "实控人·质押"),
+         ("市场类", 18, "面值·壳价值"),
+         ("F1附加", 10, "中院重整立案/现金捐赠≥1000万")]
 chans_html = "\n".join(
     f'<div class="ch"><div class="chn">{n}<i>{d}</i></div><div class="bar2"><i style="width:{w*2.5}%;background:linear-gradient(90deg,#639922,#97C45B)"></i></div><span class="chv">{w}%</span></div>'
     for n, w, d in chans)
@@ -166,7 +166,7 @@ body {{ width:750px; font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; ba
 </style></head><body>
 
 <div class="hero">
-<div class="tag">V2 · 十二维 · 100分制</div>
+<div class="tag">V2.4 · 十主维度100分+F1附加10分=110</div>
 <h1>保壳风云榜</h1>
 <h2>A股 ST/*ST 全市场退市风险横评</h2>
 <div class="meta">覆盖 {n_total} 家 · 财务基准 {rpt} · 生成日期 {gen_date} · 每周五更新</div>
@@ -193,7 +193,7 @@ body {{ width:750px; font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; ba
 <div class="card">
 <div class="ct">评分体系<span class="cs">五通道权重 = 5年176家退市案例实证贡献度</span></div>
 {chans_html}
-<div class="note" style="margin-top:12px">十二维：C1面值6 · C2壳价值10 · S1实控人12 · S2质押6 · A1净资产12 · A2扣非主营收入12 · A3扣非6 · D1现金流4 · B1立案造假10 · B2审计12 · F1重组纾困6 · H1司法4；联动闸门：面值危机压制壳价值、涉造假立案实控人维度封顶；通道封顶：C1=0或B2=0总分封顶50、B1=0封顶30。</div>
+<div class="note" style="margin-top:12px">v2.4十主维度：A1净资产12 · A2扣非主营12 · A3扣非盈利8 · A4负债8（>10亿或负债率>90%→0）· C1面值8 · C2壳价值10 · S1实控人12 · S2质押6 · B1立案/司法12（H1并入）· B2审计/内控12（否定→0）；主分100 + F1附加10（中院重整立案或现金捐赠≥1000万）=110满分；闸门：C1=0/B2=0主分封顶55、B1=0封顶33。</div>
 </div>
 
 <div class="c2box">
@@ -203,7 +203,7 @@ body {{ width:750px; font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; ba
 
 <div class="foot">
 <h3>完整榜单 · 个股12维明细 · 研究档案</h3>
-<p>全市场207家排序 / 通道封顶预警 / 点击个股看12维明细</p>
+<p>全市场百家排序 / 通道封顶预警 / 点击个股看10维明细+F1附加</p>
 <div class="go">点击文末「阅读原文」查看 →</div>
 </div>
 

@@ -1,33 +1,119 @@
 {
-  "system": "ST保壳评分系统V2 十二维100分制（2026-08-28老Z定稿，2026-09-02重构13→12维：取消F1趋势4分→A1净资产+2分/C2壳价值+2分，F2重组更名F1）",
-  "config_version": "v2.3",
+  "system": "ST保壳评分系统V2 十主维度100分制+F1附加10分（v2.4，2026-11-19重构：F1改附加项、删H1并入B1、D1改A4负债、B1→12/C1→8/A3→8）",
+  "config_version": "v2.4",
   "created": "2026-08-29",
-  "note": "阶段3分头解耦：权重/档位/闸门/评级全部外置本文件，改配置不改代码；批量fetch管道不动；v2.3(2026-09-02)维度结构13→12重构",
+  "note": "v2.4(2026-11-19)重构：10主维度=100分(A1 12/A2 12/A3 8/A4 8/C1 8/C2 10/S1 12/S2 6/B1 12/B2 12)+F1附加10分=110满分；评级阈值按比例上调；B1并入H1司法扣分；A4看负债总额+负债率；B2含内控否定/无法表示",
   "shell_base": {
     "json": "C:\\Users\\xiaot\\.workbuddy\\skills\\shell-fee-base\\shell_transactions.json",
     "key": "benchmark_config.own_mcap_median_yi",
     "fallback": 33.81
   },
   "dims": {
-    "C1": {
-      "name": "面值距离",
-      "max": 6,
-      "price_brackets": [
+    "A1": {
+      "name": "净资产充裕度",
+      "max": 12,
+      "nav_yi_brackets": [
         [
-          5,
-          6
+          10,
+          12
         ],
         [
-          3,
-          5
+          5,
+          9
         ],
         [
           2,
+          6
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "floor": 0,
+      "missing": 4
+    },
+    "A2": {
+      "name": "扣非主营业务收入",
+      "max": 12,
+      "gap_brackets": [
+        [
+          0.0,
+          12
+        ],
+        [
+          0.2,
+          9
+        ],
+        [
+          0.4,
+          6
+        ],
+        [
+          0.6,
+          3
+        ]
+      ],
+      "floor": 0,
+      "star_penalty": 3,
+      "low_margin_ratio": 0.3,
+      "low_margin_penalty": 3,
+      "missing": 3
+    },
+    "A3": {
+      "name": "扣非盈利",
+      "max": 8,
+      "profit": 8,
+      "star_loss": 0,
+      "loss": 4,
+      "missing": 3
+    },
+    "A4": {
+      "name": "负债规模与负债率(v2.4)",
+      "max": 8,
+      "liab_redline_yi": 10,
+      "ratio_redline_pct": 90,
+      "zero": 0,
+      "ratio_brackets": [
+        [
+          30,
+          8
+        ],
+        [
+          50,
+          6
+        ],
+        [
+          70,
           4
         ],
         [
-          1.5,
+          90,
           2
+        ]
+      ],
+      "missing": 4,
+      "note": "负债总额>10亿 或 负债率>90% → 0分；其余按负债率分档"
+    },
+    "C1": {
+      "name": "面值距离",
+      "max": 8,
+      "price_brackets": [
+        [
+          5,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          1.5,
+          3
         ],
         [
           1.2,
@@ -121,89 +207,19 @@
       ],
       "floor": 2
     },
-    "A1": {
-      "name": "净资产充裕度",
-      "max": 12,
-      "nav_yi_brackets": [
-        [
-          10,
-          12
-        ],
-        [
-          5,
-          9
-        ],
-        [
-          2,
-          6
-        ],
-        [
-          0,
-          3
-        ]
-      ],
-      "floor": 0,
-      "missing": 4
-    },
-    "A2": {
-      "name": "扣非主营业务收入",
-      "max": 12,
-      "gap_brackets": [
-        [
-          0.0,
-          12
-        ],
-        [
-          0.2,
-          9
-        ],
-        [
-          0.4,
-          6
-        ],
-        [
-          0.6,
-          3
-        ]
-      ],
-      "floor": 0,
-      "star_penalty": 3,
-      "low_margin_ratio": 0.3,
-      "low_margin_penalty": 3,
-      "missing": 3
-    },
-    "A3": {
-      "name": "扣非盈利",
-      "max": 6,
-      "profit": 6,
-      "star_loss": 0,
-      "loss": 3,
-      "missing": 2
-    },
-    "D1": {
-      "name": "现金流质量",
-      "max": 4,
-      "ocf_rev_ratio_brackets": [
-        [
-          0.1,
-          4
-        ],
-        [
-          0.0,
-          2
-        ]
-      ],
-      "floor": 0,
-      "missing": 1
-    },
     "B1": {
       "name": "立案/造假信号",
-      "max": 10,
-      "bj": 7,
+      "max": 12,
+      "bj": 8,
       "fraud": 0,
-      "none": 10,
-      "inv_recent": 4,
-      "inv_old": 7
+      "none": 12,
+      "inv_recent": 5,
+      "inv_old": 9,
+      "judicial_deduct": {
+        "freeze_or_case": 3,
+        "consume_limit": 2,
+        "note": "H1司法风险并入B1：实控人冻结/立案-3、限高-2，扣后不低于0"
+      }
     },
     "B2": {
       "name": "审计意见",
@@ -212,58 +228,56 @@
       "adverse": 0,
       "qualified": 6,
       "emphasis": 9,
-      "clean": 12
+      "clean": 12,
+      "ic_adverse_zero": true,
+      "note": "财报审计或内控审计出现否定/无法表示意见→0；标准无保留→12"
     },
     "F1": {
-      "name": "重组/纾困进度",
-      "max": 6,
-      "exec": 6,
-      "applied": 4,
-      "asset_ops": 2,
-      "none": 0
-    },
-    "H1": {
-      "name": "实控人司法风险",
-      "max": 4,
-      "bj": 2,
-      "freeze_or_ctrl_case": 0,
-      "consume_limit": 2,
-      "clean": 4
+      "name": "重组纾困附加分(v2.4)",
+      "max": 10,
+      "bonus": true,
+      "full": 10,
+      "none": 0,
+      "court_restruct_full": true,
+      "cash_donation_min_yi": 0.1,
+      "note": "中院重整立案公告 或 现金捐赠≥1000万公告→10分；无→0分；附加分不计入100分主分但计入总分110"
     }
   },
   "gates": [
     {
       "when": "C1==0",
-      "cap_total": 50,
-      "note": "面值危机：交易类通道已实质触发，封顶C档上沿"
+      "cap_total": 55,
+      "note": "面值危机：交易类通道触发，封顶50/100→55/110"
     },
     {
       "when": "B2==0",
-      "cap_total": 50,
-      "note": "无法表示/否定意见：规范类直接通道触发，封顶50"
+      "cap_total": 55,
+      "note": "无法表示/否定意见(含内控)：规范类通道触发，封顶55"
     },
     {
       "when": "B1==0",
-      "cap_total": 30,
-      "note": "重大违法处罚落地(立案→处罚全链条)：零容忍，封顶D档上沿"
+      "cap_total": 33,
+      "note": "重大违法处罚落地(涉造假)：零容忍，封顶33"
     }
   ],
   "rating": [
     {
-      "min": 70,
+      "min": 77,
       "label": "A"
     },
     {
-      "min": 50,
+      "min": 56,
       "label": "B"
     },
     {
-      "min": 30,
+      "min": 33,
       "label": "C"
     },
     {
       "min": 0,
       "label": "D"
     }
-  ]
+  ],
+  "bonus_max": 10,
+  "total_max": 110
 }

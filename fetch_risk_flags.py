@@ -106,7 +106,7 @@ def fetch_company(opener, code, org_id, se_date):
 # ── 标题分类(替代旧版kw+title双因子分类, 定向方案无kw) ──
 def classify_title(title):
     t = title
-    # B2 审计意见
+    # B2 审计意见（含内控审计：v2.4起内控否定/无法表示同样归audit_adverse）
     if '无法表示意见' in t or '否定意见' in t:
         return 'audit_adverse'
     if '保留意见' in t:
@@ -140,9 +140,24 @@ def classify_title(title):
 
 BUCKETS = ['investigation', 'penalty', 'warning', 'audit_adverse',
            'audit_qualified', 'audit_emphasis', 'freeze', 'consume_limit',
-           'restructuring', 'asset_sale', 'debt_waiver', 'donation']
+           'restructuring', 'asset_sale', 'debt_waiver', 'donation',
+           # v2.4 新增桶：内控审计意见 / 中院重整立案 / 现金捐赠(带金额解析)
+           'ic_adverse', 'court_restruct', 'cash_donation']
 
 RESTRUCT_STAGE = re.compile(r'计划(执行|获|批|通过|获准|获法院)|裁定批准|执行进展|重整完成|终结')
+# 中级法院重整立案（法院受理/裁定重整，且明确中级法院）
+COURT_RESTRUCT = re.compile(r'(中级(人民)?法院|中院).{0,30}(重整|受理|立案)|(重整|受理).{0,30}(中级(人民)?法院|中院)')
+# 现金捐赠金额（标题级，万/亿）
+DONATION_AMT = re.compile(r'(\d+(?:\.\d+)?)\s*(亿元|亿|万元|万)')
+
+
+def parse_donation_yi(title):
+    """标题级现金捐赠金额（亿元）；无法解析返回None（走正文降级保守口径）"""
+    m = DONATION_AMT.search(title or '')
+    if not m:
+        return None
+    v = float(m.group(1))
+    return v if '亿' in m.group(2) else v / 10000.0
 
 
 def load_org_map(opener):
@@ -195,6 +210,26 @@ def main():
             flags[code][bucket].append(rec)
             stats[bucket] = stats.get(bucket, 0) + 1
             n_hit += 1
+            # ── v2.4 附加分F1 / B2内控：同一公告并行入新桶 ──
+            # F1 中院重整立案：明确中院 或 法院裁定受理重整(重整案件法定由中院管辖)
+            if bucket == 'restructuring' and (
+                COURT_RESTRUCT.search(title)
+                or ('法院' in title and '受理' in title and '重整' in title)
+            ):
+                flags[code]['court_restruct'].append(dict(rec))
+                stats['court_restruct'] = stats.get('court_restruct', 0) + 1
+            # F1 现金捐赠≥1000万：标题级金额判定；无金额标needs_pdf由评分侧保守处理
+            if bucket == 'donation' and ('现金' in title or '现' in title):
+                amt = parse_donation_yi(title)
+                drec = dict(rec)
+                drec['amount_yi'] = amt
+                drec['needs_pdf'] = amt is None  # 标题无金额→需读正文，评分侧保守
+                flags[code]['cash_donation'].append(drec)
+                stats['cash_donation'] = stats.get('cash_donation', 0) + 1
+            # B2 内控审计否定/无法表示：标题同时含"内控/内部控制"和重非标词
+            if bucket == 'audit_adverse' and ('内控' in title or '内部控制' in title):
+                flags[code]['ic_adverse'].append(dict(rec))
+                stats['ic_adverse'] = stats.get('ic_adverse', 0) + 1
         done += 1
         if i % 20 == 0 or i == len(st_codes):
             el = time.time() - t0

@@ -62,7 +62,7 @@ def load_context(base=BASE, today=None, mkt_override=None, fin_override=None):
         print(f'[WARN] {fname} 不存在，{warn}')
         return {}
 
-    ctx['risk_flags'] = _opt('st_risk_flags.json', 'flags', 'B1/B2/F1/H1 走保守降级')
+    ctx['risk_flags'] = _opt('st_risk_flags.json', 'flags', 'B1/B2/F1 走保守降级')
     ctx['controllers'] = _opt('st_controllers.json', 'data', 'S1 走中性降级')
     ctx['top_holders'] = _opt('st_top_holders.json', 'data', 'S1 实控人持股/前3大走中性(无则默认不折减)')
     ctx['pledges'] = _opt('st_pledges.json', 'data', 'S2 走旧质押字段')
@@ -163,7 +163,8 @@ def score_v2(code, ctx=None):
     deducted = fin_val(ctx, code, 'deducted_profit')
     revenue = fin_val(ctx, code, 'revenue')
     net_equity = fin_val(ctx, code, 'total_equity')
-    operating_cf = fin_val(ctx, code, 'operating_cf')
+    total_liabilities = fin_val(ctx, code, 'total_liabilities')  # v2.4 A4
+    debt_ratio = fin_val(ctx, code, 'debt_ratio')                # v2.4 A4
     pledge_ratio = fin_val(ctx, code, 'pledge_ratio')
     rev_threshold = 1 if board in ('创业板', '科创板', 'B股') else 3  # 亿
 
@@ -330,16 +331,25 @@ def score_v2(code, ctx=None):
     else:
         a3 = DIMS['A3']['missing']
 
-    # ════ D1 现金流质量 ════
-    if operating_cf is not None and revenue:
-        ratio = operating_cf / revenue
-        d1 = DIMS['D1']['floor']
-        for th, sc in DIMS['D1']['ocf_rev_ratio_brackets']:
-            if ratio > th:
-                d1 = sc
-                break
+    # ════ A4 负债规模与负债率（v2.4：原D1现金流改为负债维度） ════
+    # 双红线：负债总额>10亿 或 负债率>90% → 0；否则按负债率分档
+    A4 = DIMS['A4']
+    liab_yi = total_liabilities / 1e8 if total_liabilities is not None else None
+    ratio_pct = debt_ratio  # debt_ratio已是百分数(如88.16表示88.16%)
+    if liab_yi is None or ratio_pct is None:
+        a4 = A4['missing']
+    elif liab_yi > A4['liab_redline_yi'] or ratio_pct > A4['ratio_redline_pct']:
+        a4 = A4['zero']
+        if liab_yi > A4['liab_redline_yi']:
+            notes.append(f'负债{liab_yi:.1f}亿>{A4["liab_redline_yi"]}亿红线')
+        if ratio_pct > A4['ratio_redline_pct']:
+            notes.append(f'负债率{ratio_pct:.0f}%>{A4["ratio_redline_pct"]}%红线')
     else:
-        d1 = DIMS['D1']['missing']
+        a4 = A4['ratio_brackets'][-1][1]  # 兜底最低档
+        for th, sc in A4['ratio_brackets']:
+            if ratio_pct <= th:
+                a4 = sc
+                break
 
     # ════ B1 立案/造假信号 ════
     inv_all = flag_bucket(ctx, code, 'investigation')
@@ -374,17 +384,28 @@ def score_v2(code, ctx=None):
         notes.append('立案调查中' if b1 == DIMS['B1']['inv_recent'] else '有立案历史(已结)')
     if inv_person:
         notes.append('董监高个人被立案/处罚')
-        inv = inv + inv_person  # H1 ctrl_case 判据需要个人案标题
+    # v2.4 H1并入B1：实控人司法风险作为B1扣分项
+    JD = DIMS['B1']['judicial_deduct']
+    ctrl_case = any(('实际控制人' in x.get('title', '') or '控股股东' in x.get('title', '')
+                     or PERSON_CASE.search(x.get('title', '') or '')) for x in (inv + inv_person))
+    if not is_bj:
+        if freeze or ctrl_case:
+            b1 = max(0, b1 - JD['freeze_or_case'])
+            notes.append('B1扣:实控人冻结/立案(-3)')
+        elif flag_bucket(ctx, code, 'consume_limit'):
+            b1 = max(0, b1 - JD['consume_limit'])
+            notes.append('B1扣:限制消费(-2)')
 
     # ════ B2 审计意见 ════
     adverse = flag_bucket(ctx, code, 'audit_adverse')
+    ic_adverse = flag_bucket(ctx, code, 'ic_adverse')  # v2.4 内控否定/无法表示
     qualified = flag_bucket(ctx, code, 'audit_qualified')
     emphasis = flag_bucket(ctx, code, 'audit_emphasis')
     if is_bj:
         b2 = DIMS['B2']['bj']  # 未覆盖，中性降级
-    elif adverse:
+    elif adverse or (DIMS['B2'].get('ic_adverse_zero') and ic_adverse):
         b2 = DIMS['B2']['adverse']
-        notes.append('无法表示/否定意见')
+        notes.append('财报/内控无法表示或否定意见')
     elif qualified:
         b2 = DIMS['B2']['qualified']
         notes.append('保留意见')
@@ -394,47 +415,33 @@ def score_v2(code, ctx=None):
     else:
         b2 = DIMS['B2']['clean']  # 巨潮无命中=最近年报无重非标
 
-    # ════ F1 重组/纾困进度（v2.3起：原F2更名为F1，原F1经营改善趋势已取消并入A1/C2） ════
-    f1 = DIMS['F1']['none']
-    restructuring = flag_bucket(ctx, code, 'restructuring')
-    asset_sale = flag_bucket(ctx, code, 'asset_sale')
-    debt_waiver = flag_bucket(ctx, code, 'debt_waiver')
-    donation = flag_bucket(ctx, code, 'donation')
+    # ════ F1 重组纾困附加分（v2.4：改附加项10分，不计入主维度100分） ════
+    # 满分条件：中院重整立案公告 或 现金捐赠≥1000万公告；无→0
+    F1 = DIMS['F1']
+    court_restruct = flag_bucket(ctx, code, 'court_restruct')
+    cash_donation = flag_bucket(ctx, code, 'cash_donation')
+    min_donation = F1['cash_donation_min_yi']  # 0.1亿=1000万
+    f1 = F1['none']
     if not is_bj:
-        if any(x.get('stage') == 'exec' for x in restructuring):
-            f1 = DIMS['F1']['exec']
-            notes.append('重整执行中')
-        elif restructuring:
-            f1 = DIMS['F1']['applied']
-            notes.append('申请/预重整')
-        elif asset_sale or debt_waiver or donation:
-            f1 = DIMS['F1']['asset_ops']
-            notes.append('出售资产/债务豁免')
+        if court_restruct:
+            f1 = F1['full']
+            notes.append('F1附加:中院重整立案')
+        elif any((d.get('amount_yi') or 0) >= min_donation for d in cash_donation):
+            f1 = F1['full']
+            notes.append('F1附加:现金捐赠≥1000万')
+        # 标题无金额的捐赠公告(needs_pdf)保守不给满分，避免虚增
 
-    # ════ H1 实控人司法风险 ════
-    consume = flag_bucket(ctx, code, 'consume_limit')
-    ctrl_case = any('实际控制人' in x.get('title', '') or '控股股东' in x.get('title', '')
-                    or PERSON_CASE.search(x.get('title', '') or '') for x in inv)
-    if is_bj:
-        h1 = DIMS['H1']['bj']
-    elif freeze or ctrl_case:
-        h1 = DIMS['H1']['freeze_or_ctrl_case']
-        if not any('股份冻结' in n for n in notes):
-            notes.append('实控人冻结/立案')
-    elif consume:
-        h1 = DIMS['H1']['consume_limit']
-        notes.append('限制消费')
-    else:
-        h1 = DIMS['H1']['clean']
-
-    total = c1 + c2 + s1 + s2 + a1 + a2 + a3 + d1 + b1 + b2 + f1 + h1
-    # ── 通道封顶（一票否决，闸门列表config驱动） ──
+    # v2.4 主分 = 10项主维度100分；附加分F1单列；总分=主分+F1(满分110)
+    base = a1 + a2 + a3 + a4 + c1 + c2 + s1 + s2 + b1 + b2
+    # ── 通道封顶（一票否决，闸门仅约束主分，附加分不受闸门限制） ──
     dim_vals = {'C1': c1, 'B2': b2, 'B1': b1}
     for g in GATES:
         dim, val = g['when'].split('==')
         if dim_vals.get(dim) == int(val):
-            total = min(total, g['cap_total'])
-    # V2评级分界（2026-08-28校准，config驱动）
+            if base > g['cap_total']:
+                base = g['cap_total']
+    total = base + f1
+    # V2.4评级分界（110分制，config驱动）
     level = next(r['label'] for r in CFG['rating'] if total > r['min']) if total > CFG['rating'][-1]['min'] else CFG['rating'][-1]['label']
 
     v1 = ctx['v1_scores'].get(code, (None, None, None))
@@ -445,9 +452,10 @@ def score_v2(code, ctx=None):
 
     return {
         'code': code, 'name': name, 'type': '*ST' if is_star else 'ST', 'board': board,
+        'A1': a1, 'A2': a2, 'A3': a3, 'A4': a4,
         'C1': c1, 'C2': c2, 'S1': s1, 'S2': s2,
-        'A1': a1, 'A2': a2, 'A3': a3, 'D1': d1,
-        'B1': b1, 'B2': b2, 'F1': f1, 'H1': h1,
+        'B1': b1, 'B2': b2,
+        'F1': f1, 'base': base,        # v2.4: F1附加分, base主分100, total=base+F1
         'total': total, 'level': level,
         'controller': ctrl.get('controller'),
         'controller_cat': ctrl_cat,
@@ -463,7 +471,7 @@ if __name__ == '__main__':
     ctx = load_context()
     with open(os.path.join(BASE, 'st_scores_v2.json'), encoding='utf-8') as f:
         board_scores = {r['code']: r for r in json.load(f)['data']}
-    dims = ['C1', 'C2', 'S1', 'S2', 'A1', 'A2', 'A3', 'D1', 'B1', 'B2', 'F1', 'H1']
+    dims = ['A1', 'A2', 'A3', 'A4', 'C1', 'C2', 'S1', 'S2', 'B1', 'B2', 'F1']
     import sys
     test_codes = sys.argv[1:] or ['600543', '301139', '000698', '002883', '600079', '603517']
     all_ok = True

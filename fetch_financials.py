@@ -155,6 +155,7 @@ for code in codes:
         # 资产负债表
         'total_equity': None,     # 股东权益合计
         'debt_ratio': None,       # 资产负债率
+        'total_liabilities': None,  # 负债合计(A4维度 v2.4)
         # 现金流量表
         'operating_cf': None,     # 经营性现金流净额
         # 质押
@@ -172,11 +173,12 @@ for code in codes:
         fin['ocf_per_share'] = safe_num(row.iloc[11] if len(row) > 11 else None)
 
     # --- 资产负债表 (位置索引) ---
-    # zcfz after set_index: iloc[0]=序号, [11]=资产负债率, [12]=股东权益合计, [13]=公告日期
+    # zcfz after set_index: [9]=负债-总负债, [11]=资产负债率, [12]=股东权益合计
     if code in df_zcfz.index:
         row = df_zcfz.loc[code]
         fin['total_equity'] = safe_num(row.iloc[12] if len(row) > 12 else None)
         fin['debt_ratio'] = safe_num(row.iloc[11] if len(row) > 11 else None)
+        fin['total_liabilities'] = safe_num(row.iloc[9] if len(row) > 9 else None)
 
     # --- 现金流量表 (位置索引) ---
     # xjll after set_index: iloc[0]=序号, [4]=经营性现金流净额, [10]=公告日期
@@ -208,6 +210,7 @@ cov = {
     'deducted_profit': sum(1 for f in financials.values() if f['deducted_profit'] is not None),
     'total_equity': sum(1 for f in financials.values() if f['total_equity'] is not None),
     'debt_ratio': sum(1 for f in financials.values() if f['debt_ratio'] is not None),
+    'total_liabilities': sum(1 for f in financials.values() if f['total_liabilities'] is not None),
     'operating_cf': sum(1 for f in financials.values() if f['operating_cf'] is not None),
     'pledge_ratio': sum(1 for f in financials.values() if f['pledge_ratio'] is not None),
 }
