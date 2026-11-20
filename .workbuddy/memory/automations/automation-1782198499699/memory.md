@@ -131,3 +131,16 @@
 1. 必须在 Windows 凭据管理器中添加 `git:https://github.com` 凭据（GitHub PAT classic/fine-grained，需 repo 权限），或配置 Git 使用 `push_via_api.py` 经 api.github.com 推送
 2. 当前本地未推送的 commit 已累积 3 个（d5b344d、4768590 等），恢复通道后 `git push origin HEAD` 会一次性推送
 3. 数据链已就绪，网络恢复后无需重跑
+
+## 2026-11-20 09:05 执行
+
+**结果：全链路成功，线上已更新（首次 v2.4 十主维度+F1附加口径的常规周五更新）**
+
+- 环境：3.13.12 python 已带 requests 2.34.2，四采集无降级全量 198/198
+- weekly_update_friday.py 13步：一次通过（198家；移除002122 ST汇洲摘帽，新增0；行情/价格/市值 198/198）
+- 最终分布：A16/B66/C79/D37，均分54.7；国资壳56.4、民企54.4；F1附加命中21家（11-19 口径迁移后首次全量重采）
+- verify_html.js：✅ 全通过（RAW/V2各198行、row len 21、sum!=total 0、missing 0、F1 hits 21、莫高73.6/B、JS语法OK）
+- git：commit f2139d4 → 与远端 2/2 分叉，`git pull --rebase origin main` 跳过 patch-equivalent 3 提交后线性化 → push ✅ a896463..6239282
+- 线上验证：✅ assistingtai.github.io/st-assist/baokeng-rank.html 200、"覆盖公司：198 家"、v2.4 文案就位、002122 仅存 REPORTS 历史库
+- 注意：远端期间出现 a896463（PDF正文解析补F1，来自同日另一会话），rebase 已正确合并，未冲突
+- 提示词仍写"V2十三维"与旧URL zsheng007.github.io/baokeng-ranking，实际 v2.4 十主维度110分制 + AssistingtAI/st-assist
