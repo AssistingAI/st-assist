@@ -186,16 +186,14 @@ def main():
     org_map = load_org_map(opener)
     print(f'      orgId映射: {len(org_map)} 只')
 
-    flags = {c: {b: [] for b in BUCKETS} for c in st_codes}
-    stats = {}
-
-    t0 = time.time()
-    done = 0
-    for i, code in enumerate(st_codes, 1):
+    def process_one(code):
+        """单公司采集+分桶（线程内独立opener，返回 code -> buckets dict）"""
         org_id = org_map.get(code)
         if not org_id:
-            continue  # 北交所等不在巨潮沪深库, 走类型推演
-        anns = fetch_company(opener, code, org_id, se_date)
+            return code, None, 0  # 北交所等不在巨潮沪深库
+        my_op = make_opener()  # 每线程独立cookie
+        anns = fetch_company(my_op, code, org_id, se_date)
+        buckets = {b: [] for b in BUCKETS}
         n_hit = 0
         for a in anns:
             title = strip_tags(a.get('announcementTitle', ''))
@@ -204,36 +202,44 @@ def main():
                 continue
             date = ts_to_date(a.get('announcementTime'))
             rec = {'title': title, 'date': date}
-            # 重整分阶段: 早期(申请/预重整/受理) vs 执行期
             if bucket == 'restructuring':
                 rec['stage'] = 'exec' if RESTRUCT_STAGE.search(title) else 'early'
-            flags[code][bucket].append(rec)
-            stats[bucket] = stats.get(bucket, 0) + 1
+            buckets[bucket].append(rec)
             n_hit += 1
-            # ── v2.4 附加分F1 / B2内控：同一公告并行入新桶 ──
-            # F1 中院重整立案：明确中院 或 法院裁定受理重整(重整案件法定由中院管辖)
-            if bucket == 'restructuring' and (
+            # ── v2.4 F1附加 / B2内控：同一公告并行入新桶 ──
+            if bucket == 'restructuring' and '不予受理' not in title and (
                 COURT_RESTRUCT.search(title)
                 or ('法院' in title and '受理' in title and '重整' in title)
             ):
-                flags[code]['court_restruct'].append(dict(rec))
-                stats['court_restruct'] = stats.get('court_restruct', 0) + 1
-            # F1 现金捐赠≥1000万：标题级金额判定；无金额标needs_pdf由评分侧保守处理
+                buckets['court_restruct'].append(dict(rec))
             if bucket == 'donation' and ('现金' in title or '现' in title):
                 amt = parse_donation_yi(title)
                 drec = dict(rec)
                 drec['amount_yi'] = amt
-                drec['needs_pdf'] = amt is None  # 标题无金额→需读正文，评分侧保守
-                flags[code]['cash_donation'].append(drec)
-                stats['cash_donation'] = stats.get('cash_donation', 0) + 1
-            # B2 内控审计否定/无法表示：标题同时含"内控/内部控制"和重非标词
+                drec['needs_pdf'] = amt is None
+                buckets['cash_donation'].append(drec)
             if bucket == 'audit_adverse' and ('内控' in title or '内部控制' in title):
-                flags[code]['ic_adverse'].append(dict(rec))
-                stats['ic_adverse'] = stats.get('ic_adverse', 0) + 1
-        done += 1
-        if i % 20 == 0 or i == len(st_codes):
-            el = time.time() - t0
-            print(f'  [{i}/{len(st_codes)}] {code} 公告{len(anns)}条 命中{n_hit} | 累计{sum(stats.values())}条 | 已用{el/60:.1f}分钟')
+                buckets['ic_adverse'].append(dict(rec))
+        return code, buckets, len(anns)
+
+    flags = {c: {b: [] for b in BUCKETS} for c in st_codes}
+    stats = {}
+    t0 = time.time()
+    done = 0
+    MAX_WORKERS = 4  # 巨潮并发度：4线程兼顾速度与频率友好
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
+        futs = {ex.submit(process_one, c): c for c in st_codes}
+        for fut in as_completed(futs):
+            code, buckets, n_anns = fut.result()
+            done += 1
+            if buckets is not None:
+                flags[code] = buckets
+                for b, items in buckets.items():
+                    stats[b] = stats.get(b, 0) + len(items)
+            if done % 20 == 0 or done == len(st_codes):
+                el = time.time() - t0
+                print(f'  [{done}/{len(st_codes)}] 已用{el/60:.1f}分钟 | 累计命中{sum(stats.values())}条', flush=True)
 
     # 写出
     out = {
