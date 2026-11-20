@@ -25,3 +25,9 @@ _test_qr_src.png
 # GitHub token（API 推送用，绝不入库）
 .gh_token
 gh_token.txt
+
+# 公告PDF缓存与数据备份（本地重算用，不入库）
+.pdf_cache/
+st_risk_flags_backup_*.json
+*_backup_*.json
+score_v2_v23_backup.py

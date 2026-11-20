@@ -423,13 +423,17 @@ def score_v2(code, ctx=None):
     min_donation = F1['cash_donation_min_yi']  # 0.1亿=1000万
     f1 = F1['none']
     if not is_bj:
-        if court_restruct:
+        # 中院重整：PDF正文校验通过的才算（pdf_verified=False为正文驳回，回滚误命中）
+        court_valid = [c for c in court_restruct if c.get('pdf_verified') is not False]
+        # 现金捐赠：PDF正文解析出的金额≥1000万（标题级amount_yi同样认可）
+        donation_valid = any((d.get('amount_yi') or 0) >= min_donation for d in cash_donation)
+        if court_valid:
             f1 = F1['full']
             notes.append('F1附加:中院重整立案')
-        elif any((d.get('amount_yi') or 0) >= min_donation for d in cash_donation):
+        elif donation_valid:
             f1 = F1['full']
             notes.append('F1附加:现金捐赠≥1000万')
-        # 标题无金额的捐赠公告(needs_pdf)保守不给满分，避免虚增
+        # 标题/正文均无金额的捐赠公告(amount_yi=None)保守不给满分，避免虚增
 
     # v2.4 主分 = 10项主维度100分；附加分F1单列；总分=主分+F1(满分110)
     base = a1 + a2 + a3 + a4 + c1 + c2 + s1 + s2 + b1 + b2
