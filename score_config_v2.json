@@ -5,8 +5,9 @@
   "note": "v2.4(2026-11-19)重构：10主维度=100分(A1 12/A2 12/A3 8/A4 8/C1 8/C2 10/S1 12/S2 6/B1 12/B2 12)+F1附加10分=110满分；评级阈值按比例上调；B1并入H1司法扣分；A4看负债总额+负债率；B2含内控否定/无法表示",
   "shell_base": {
     "json": "C:\\Users\\xiaot\\.workbuddy\\skills\\shell-fee-base\\shell_transactions.json",
-    "key": "benchmark_config.own_mcap_median_yi",
-    "fallback": 33.81
+    "key": "benchmark_config.pub_research_mcap_median_yi",
+    "fallback": 30.84,
+    "note": "2026-11-20 保壳风云榜C2基准切换为公告研究口径(近3年/意向+完成/市值<50亿,308样本,实时复算自control_change_2024_now.json,当前30.84亿)；own口径33.81亿保留给大Deal/V168-G。改口径只改key。"
   },
   "dims": {
     "A1": {

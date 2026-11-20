@@ -77,12 +77,14 @@ def load_context(base=BASE, today=None, mkt_override=None, fin_override=None):
                 v1[r['code']] = (r.get('total'), r.get('level'), r.get('rank'))
     ctx['v1_scores'] = v1
 
-    # 壳价值基准（亿）：从shell-fee-base单源库动态读取own口径
+    # 壳价值基准（亿）：从shell-fee-base单源库动态读取，具体口径由 config.shell_base.key 指定
+    # 2026-11-20 起默认公告研究口径(pub_research_mcap_median_yi,30.84亿)；own口径33.81保留给大Deal/V168-G
     try:
         sb = cfg['shell_base']
+        key_name = sb.get('key', 'benchmark_config.pub_research_mcap_median_yi').split('.')[-1]
         with open(sb['json'], encoding='utf-8') as f:
             _cfg = json.load(f).get('benchmark_config', {})
-        ctx['shell_base'] = float(_cfg.get('own_mcap_median_yi') or sb['fallback'])
+        ctx['shell_base'] = float(_cfg.get(key_name) or sb['fallback'])
     except Exception:
         ctx['shell_base'] = float(cfg['shell_base']['fallback'])
     return ctx

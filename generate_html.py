@@ -38,13 +38,17 @@ else:
 
 today = date.today().isoformat()
 
-# 壳价值基准（亿）：与 build_baokeng_v2.py 同源，读 shell-fee-base 单源库 own_stats 口径
+# 壳价值基准（亿）：与 score_v2.py 同源，读 shell-fee-base 单源库
+# 2026-11-20 起公告研究口径(pub_research_mcap_median_yi,30.84亿)，与评分C2完全同源；own口径33.81仅大Deal/V168-G用
 try:
-    with open(r'C:\Users\xiaot\.workbuddy\skills\shell-fee-base\shell_transactions.json', encoding='utf-8') as _f:
+    with open(r'C:\Users\xiaot\WorkBuddy\2026-05-16-task-2\score_config_v2.json', encoding='utf-8') as _cf:
+        _sb = json.load(_cf)['shell_base']
+    _key = _sb.get('key', 'benchmark_config.pub_research_mcap_median_yi').split('.')[-1]
+    with open(_sb['json'], encoding='utf-8') as _f:
         _cfg = json.load(_f).get('benchmark_config', {})
-    SHELL_BASE_YI = float(_cfg.get('own_mcap_median_yi') or 33.81)
+    SHELL_BASE_YI = float(_cfg.get(_key) or _sb['fallback'])
 except Exception:
-    SHELL_BASE_YI = 33.81
+    SHELL_BASE_YI = 30.84
 SHELL_BASE_LABEL = f'{SHELL_BASE_YI:.1f}'  # 展示口径
 
 # 研究档案索引（reports_index.json 由 convert_reports_html.py 生成；不存在则按钮不出现）
