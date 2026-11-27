@@ -34,7 +34,7 @@ except ImportError:
     print("[错误] 需要 requests：pip install requests")
     sys.exit(1)
 
-REPO = "AssistingtAI/st-assist"
+REPO = "AssistingAI/st-assist"  # 2026-11-26 账号 AssistingtAI→AssistingAI
 BRANCH = "main"
 API = "https://api.github.com"
 ROOT = os.path.dirname(os.path.abspath(__file__))

@@ -77,7 +77,7 @@ def main():
             print(out2.strip()[:1500])
             print()
             print("验证线上页面（1-2 分钟后生效）：")
-            print("  https://assistingtai.github.io/st-assist/apply.html")
+            print("  https://assistingai.github.io/st-assist/apply.html")
             return 0
         else:
             print("[%s] 推送失败（可能是认证问题）：" % stamp)
