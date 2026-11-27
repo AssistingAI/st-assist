@@ -32,4 +32,5 @@
 - automation-1782198499699 每周五9:00 全自动更新(13步链)；automation-1787916836110 每周五11:00名单核验。
 - weekly_update_friday.py 主脚本；fetch_financials/fetch_risk_flags 链外刷新。
 - venv Python ~/.workbuddy/binaries/python/envs/default/Scripts/python.exe(docx/requests)；Node ~/.workbuddy/binaries/node/versions/22.12.0/node.exe。
-- GitHub被限流用 Git Data API 模拟推送(blobs→trees→commits→refs)。
+- GitHub被限流用 Git Data API 模拟推送(blobs→trees→commits→refs,脚本push_via_api.py读.gh_token)。
+- **Pages部署走 GitHub Actions workflow**(build_type=workflow,.github/workflows/pages.yml)，不是分支直出：推送后必须确认 Actions run conclusion=success，只看 git push/API 成功不算上线。2026-11-27 踩坑：upload-pages-artifact@v3 底层 artifact v3 存储停服→deploy-pages 报"No artifacts named github-pages"→已升级 @v4 修复。`push_via_api.py` API复刻 commit SHA 会与本地不同(父节点来自远端)，但 tree 一致即等价。

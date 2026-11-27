@@ -1,5 +1,18 @@
 # automation-1782198499699 - 保壳风云榜每周五更新
 
+## 2026-11-27 21:05 执行
+
+**结果：全链路成功，线上已更新（199家；含一次 Pages workflow 故障修复）**
+
+- 环境：3.13.12 python 缺 requests → pip 装 2.34.2；remote 已是 AssistingAI/st-assist
+- weekly_update_friday.py 13步：一次通过（199家；新增000820神雾节能/000892欢瑞世纪/300500启迪设计/300670大烨智能4只，移除002872/600381/603595摘帽3只；行情/市值199/199，四采集无降级）
+- 分布：V2 A14/B66/C83/D36，均分54.5；莫高73.6/B；F1命中21家
+- verify_html.js：✅ 全通过（RAW/V2各199行、sum!=total 0、missing 0、JS语法OK）
+- commit 28744bf（21文件）；push 走 API 复刻（github.com:443 reset）→ 远端 580c256b
+- **⚠️ 新坑：Pages 是 build_type=workflow（Actions 部署），API push 触发的 run 46004627112 deploy-pages 失败——pages.yml 用 upload-pages-artifact@v3（artifact v3 存储停服）。修复：pages.yml v3→v4，commit 903ac36，API推送→9eb37116，新 run 46005895047 ✅ success**
+- 线上验证：✅ 199家、新增公司就位、Last-Modified 11-27 13:18、index.html 200
+- **后续：推送后须确认 Actions run conclusion=success（不能只看 push 成功）；workflow 已修为 @v4，无需再改**
+
 ## 2026-11-13 09:05 执行
 
 **结果：全链路成功，线上已更新（首次常规 git push 成功，历史分叉已拉直）**
