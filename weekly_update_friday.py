@@ -8,7 +8,7 @@
 5. 对比新旧名单，生成变更报告
 6. 运行 build_baokeng.py 评分(V1数据字段)
 7-10. V2数据管道: fetch_controllers/pledges/trends/deduct_income
-11. 运行 build_baokeng_v2.py 评分(V2十三维唯一口径)
+11. 运行 build_baokeng_v2.py 评分(V2 v2.4十主维度+F1附加唯一口径)
 12. 运行 generate_html.py 生成 HTML
 """
 import json
@@ -357,7 +357,7 @@ def main():
             log(f"  ⚠️ {script} 失败(returncode={r.returncode}), V2相应维度将走降级逻辑")
 
     log()
-    log("[11/13] 运行 build_baokeng_v2.py 评分(V2十三维唯一口径)...")
+    log("[11/13] 运行 build_baokeng_v2.py 评分(V2 v2.4十主维度+F1附加唯一口径)...")
     retv2 = subprocess.run([sys.executable, os.path.join(BASE, "build_baokeng_v2.py")], cwd=BASE)
     if retv2.returncode != 0:
         log("  ❌ V2评分失败! 页面为V2单口径, 必须修复后再生成HTML")

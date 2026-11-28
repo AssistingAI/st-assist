@@ -146,7 +146,7 @@ def fraud_involved(ctx, code):
 
 
 def score_v2(code, ctx=None):
-    """V2十二维单股评分（唯一实现源，v2.3 13→12重构）。返回与榜单st_scores_v2.json同构的记录dict。"""
+    """V2 v2.4 单股评分（唯一实现源：十主维度100分+F1附加10分=110）。返回与榜单st_scores_v2.json同构的记录dict。"""
     if ctx is None:
         ctx = load_context()
     DIMS = ctx['dims']

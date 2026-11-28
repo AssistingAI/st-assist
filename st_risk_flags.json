@@ -1,36 +1,43 @@
 {
  "meta": {
-  "fetched_at": "2026-11-20 09:02",
-  "window": "2024-11-30~2026-11-20",
+  "fetched_at": "2026-11-28 13:47",
+  "window": "2024-12-08~2026-11-28",
   "method": "company_targeted",
   "bucket_stats": {
-   "investigation": 117,
-   "penalty": 169,
-   "warning": 40,
+   "investigation": 119,
+   "penalty": 171,
+   "warning": 37,
    "audit_adverse": 89,
-   "audit_qualified": 328,
+   "audit_qualified": 327,
    "audit_emphasis": 259,
-   "freeze": 520,
+   "freeze": 529,
    "consume_limit": 5,
-   "restructuring": 679,
-   "asset_sale": 690,
+   "restructuring": 690,
+   "asset_sale": 714,
    "debt_waiver": 77,
-   "donation": 66,
+   "donation": 71,
    "ic_adverse": 78,
-   "court_restruct": 18,
-   "cash_donation": 11
+   "court_restruct": 25,
+   "cash_donation": 12
   },
   "pdf_enrich": {
-   "pdf_ok": 29,
-   "amt_found": 11,
-   "restruct_confirmed": 18,
+   "pdf_ok": 37,
+   "amt_found": 12,
+   "restruct_confirmed": 25,
    "restruct_rejected": 0,
    "pdf_fail": 0
   }
  },
  "flags": {
   "000010": {
-   "investigation": [],
+   "investigation": [
+    {
+     "title": "关于收到《行政监管措施决定书》和《立案告知书》的公告",
+     "date": "2026-11-24",
+     "announcementId": "1225684790",
+     "adjunctUrl": "finalpage/2026-11-24/1225684790.PDF"
+    }
+   ],
    "penalty": [],
    "warning": [],
    "audit_adverse": [],
@@ -214,12 +221,6 @@
      "date": "2024-12-31",
      "announcementId": "1222184429",
      "adjunctUrl": "finalpage/2024-12-31/1222184429.PDF"
-    },
-    {
-     "title": "关于债务重组及重大资产出售的进展公告",
-     "date": "2024-11-30",
-     "announcementId": "1221890579",
-     "adjunctUrl": "finalpage/2024-11-30/1221890579.PDF"
     }
    ],
    "debt_waiver": [],
@@ -422,6 +423,12 @@
    "debt_waiver": [],
    "donation": [
     {
+     "title": "中迪投资关于公司接受北京微曜衡晶科技中心（有限合伙）赠与现金的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225685821",
+     "adjunctUrl": "finalpage/2026-11-25/1225685821.PDF"
+    },
+    {
      "title": "中迪投资关于公司接受深圳市贤益企业管理合伙企业（有限合伙）赠与现金的进展公告",
      "date": "2026-11-19",
      "announcementId": "1225677325",
@@ -467,6 +474,16 @@
    "ic_adverse": [],
    "court_restruct": [],
    "cash_donation": [
+    {
+     "title": "中迪投资关于公司接受北京微曜衡晶科技中心（有限合伙）赠与现金的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225685821",
+     "adjunctUrl": "finalpage/2026-11-25/1225685821.PDF",
+     "amount_yi": 0.3,
+     "needs_pdf": false,
+     "pdf_amount": true,
+     "_pdf_excerpt": "合伙）（以下简称“微曜衡晶”）向本公司赠与现金3,000 万元。"
+    },
     {
      "title": "中迪投资关于公司接受深圳市贤益企业管理合伙企业（有限合伙）赠与现金的进展公告",
      "date": "2026-11-19",
@@ -539,6 +556,34 @@
    "consume_limit": [],
    "restructuring": [
     {
+     "title": "关于与重整投资人签署《（预）重整投资协议之补充协议》的公告",
+     "date": "2026-11-27",
+     "announcementId": "1225690879",
+     "adjunctUrl": "finalpage/2026-11-27/1225690879.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于法院同意公司在重整期间继续经营及自行管理财产和营业事务的公告",
+     "date": "2026-11-24",
+     "announcementId": "1225684549",
+     "adjunctUrl": "finalpage/2026-11-24/1225684549.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于公司重整债权申报通知及召开债权人会议的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682647",
+     "adjunctUrl": "finalpage/2026-11-21/1225682647.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于法院裁定受理公司重整并指定管理人暨公司股票交易将被叠加实施退市风险警示的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682592",
+     "adjunctUrl": "finalpage/2026-11-21/1225682592.PDF",
+     "stage": "early"
+    },
+    {
      "title": "关于与（预）重整投资人签署《（预）重整投资协议之补充协议》的公告",
      "date": "2026-11-05",
      "announcementId": "1225658226",
@@ -592,7 +637,17 @@
    "debt_waiver": [],
    "donation": [],
    "ic_adverse": [],
-   "court_restruct": [],
+   "court_restruct": [
+    {
+     "title": "关于法院裁定受理公司重整并指定管理人暨公司股票交易将被叠加实施退市风险警示的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682592",
+     "adjunctUrl": "finalpage/2026-11-21/1225682592.PDF",
+     "stage": "early",
+     "needs_pdf": false,
+     "pdf_verified": true
+    }
+   ],
    "cash_donation": []
   },
   "000615": {
@@ -953,27 +1008,6 @@
      "announcementId": "1222016810",
      "adjunctUrl": "finalpage/2024-12-14/1222016810.PDF",
      "stage": "early"
-    },
-    {
-     "title": "关于公司预重整期间债权申报的公告",
-     "date": "2024-12-06",
-     "announcementId": "1221939349",
-     "adjunctUrl": "finalpage/2024-12-06/1221939349.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "关于法院指定公司预重整期间临时管理人的公告",
-     "date": "2024-12-06",
-     "announcementId": "1221939348",
-     "adjunctUrl": "finalpage/2024-12-06/1221939348.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "关于法院决定对公司启动预重整的公告",
-     "date": "2024-12-04",
-     "announcementId": "1221920372",
-     "adjunctUrl": "finalpage/2024-12-04/1221920372.PDF",
-     "stage": "early"
     }
    ],
    "asset_sale": [],
@@ -1315,7 +1349,14 @@
      "stage": "early"
     }
    ],
-   "asset_sale": [],
+   "asset_sale": [
+    {
+     "title": "关于筹划重大资产重组暨与交易对方签署《股权转让意向协议》的提示性公告",
+     "date": "2026-11-24",
+     "announcementId": "1225683366",
+     "adjunctUrl": "finalpage/2026-11-24/1225683366.PDF"
+    }
+   ],
    "debt_waiver": [
     {
      "title": "关于公司及子公司与中国长城河北分公司签署债务重组协议及相关担保事项的公告",
@@ -2277,6 +2318,51 @@
    ],
    "cash_donation": []
   },
+  "000820": {
+   "investigation": [
+    {
+     "title": "关于公司收到中国证监会立案告知书的公告",
+     "date": "2026-06-03",
+     "announcementId": "1225346382",
+     "adjunctUrl": "finalpage/2026-06-03/1225346382.PDF"
+    }
+   ],
+   "penalty": [
+    {
+     "title": "关于收到《行政处罚事先告知书》的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225687040",
+     "adjunctUrl": "finalpage/2026-11-25/1225687040.PDF"
+    }
+   ],
+   "warning": [],
+   "audit_adverse": [],
+   "audit_qualified": [],
+   "audit_emphasis": [],
+   "freeze": [
+    {
+     "title": "关于持股5%以上股东所持公司股份解除冻结的公告",
+     "date": "2025-03-21",
+     "announcementId": "1222855284",
+     "adjunctUrl": "finalpage/2025-03-21/1222855284.PDF"
+    }
+   ],
+   "consume_limit": [],
+   "restructuring": [],
+   "asset_sale": [],
+   "debt_waiver": [],
+   "donation": [
+    {
+     "title": "关于2025年度预计申请授信额度进展暨接受关联方无偿担保的公告",
+     "date": "2025-05-21",
+     "announcementId": "1223608891",
+     "adjunctUrl": "finalpage/2025-05-21/1223608891.PDF"
+    }
+   ],
+   "ic_adverse": [],
+   "court_restruct": [],
+   "cash_donation": []
+  },
   "000821": {
    "investigation": [],
    "penalty": [
@@ -2736,13 +2822,6 @@
      "announcementId": "1222181172",
      "adjunctUrl": "finalpage/2024-12-31/1222181172.PDF",
      "stage": "early"
-    },
-    {
-     "title": "关于控股股东财信地产、间接控股股东财信集团预重整进展公告",
-     "date": "2024-11-30",
-     "announcementId": "1221890144",
-     "adjunctUrl": "finalpage/2024-11-30/1221890144.PDF",
-     "stage": "early"
     }
    ],
    "asset_sale": [],
@@ -2767,6 +2846,80 @@
      "pdf_verified": true
     }
    ],
+   "cash_donation": []
+  },
+  "000892": {
+   "investigation": [
+    {
+     "title": "关于收到中国证监会《立案告知书》的公告",
+     "date": "2026-04-23",
+     "announcementId": "1225152137",
+     "adjunctUrl": "finalpage/2026-04-23/1225152137.PDF"
+    }
+   ],
+   "penalty": [
+    {
+     "title": "关于公司及相关当事人收到《行政处罚事先告知书》的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682609",
+     "adjunctUrl": "finalpage/2026-11-21/1225682609.PDF"
+    }
+   ],
+   "warning": [],
+   "audit_adverse": [],
+   "audit_qualified": [],
+   "audit_emphasis": [],
+   "freeze": [
+    {
+     "title": "关于公司持股5%以上股东所持部分股份被司法强制执行实施完成暨解除质押及冻结的公告",
+     "date": "2026-07-01",
+     "announcementId": "1225400936",
+     "adjunctUrl": "finalpage/2026-07-01/1225400936.PDF"
+    },
+    {
+     "title": "关于公司持股5%以上股东所持部分股份被司法强制执行实施结果、权益变动触及1%整数倍暨解除质押及冻结的公告",
+     "date": "2026-05-09",
+     "announcementId": "1225286852",
+     "adjunctUrl": "finalpage/2026-05-09/1225286852.PDF"
+    },
+    {
+     "title": "关于公司持股5%以上股东所持部分股份被司法强制执行暨解除质押及冻结的进展公告",
+     "date": "2026-02-12",
+     "announcementId": "1224977964",
+     "adjunctUrl": "finalpage/2026-02-12/1224977964.PDF"
+    },
+    {
+     "title": "关于公司持股5%以上股东所持部分股份被司法强制执行实施完成暨解除质押及冻结的公告",
+     "date": "2026-01-13",
+     "announcementId": "1224930937",
+     "adjunctUrl": "finalpage/2026-01-13/1224930937.PDF"
+    },
+    {
+     "title": "关于公司持股5%以上股东所持部分股份被司法强制执行进展暨解除质押及冻结的公告",
+     "date": "2025-11-25",
+     "announcementId": "1224824166",
+     "adjunctUrl": "finalpage/2025-11-25/1224824166.PDF"
+    },
+    {
+     "title": "关于公司持股5%以上股东所持部分股份被司法强制执行实施结果暨解除质押及冻结的公告",
+     "date": "2025-09-30",
+     "announcementId": "1224691750",
+     "adjunctUrl": "finalpage/2025-09-30/1224691750.PDF"
+    },
+    {
+     "title": "关于公司持股5%以上股东所持部分股份被司法强制执行进展暨解除质押及冻结的公告",
+     "date": "2025-08-20",
+     "announcementId": "1224519951",
+     "adjunctUrl": "finalpage/2025-08-20/1224519951.PDF"
+    }
+   ],
+   "consume_limit": [],
+   "restructuring": [],
+   "asset_sale": [],
+   "debt_waiver": [],
+   "donation": [],
+   "ic_adverse": [],
+   "court_restruct": [],
    "cash_donation": []
   },
   "000903": {
@@ -2873,6 +3026,12 @@
     }
    ],
    "penalty": [
+    {
+     "title": "关于公司及相关当事人收到《行政处罚决定书》的公告",
+     "date": "2026-11-28",
+     "announcementId": "1225693397",
+     "adjunctUrl": "finalpage/2026-11-28/1225693397.PDF"
+    },
     {
      "title": "关于公司及相关当事人收到《行政处罚事先告知书》的公告",
      "date": "2026-09-10",
@@ -2989,6 +3148,12 @@
    "consume_limit": [],
    "restructuring": [],
    "asset_sale": [
+    {
+     "title": "广西农投糖业集团股份有限公司关于重大资产重组的进展公告",
+     "date": "2026-11-25",
+     "announcementId": "1225685552",
+     "adjunctUrl": "finalpage/2026-11-25/1225685552.PDF"
+    },
     {
      "title": "北京天驰君泰关于广西农投糖业集团股份有限公司重大资产出售暨关联交易相关主体买卖股票情况的自查报告之专项核查意见",
      "date": "2026-11-12",
@@ -3944,50 +4109,6 @@
    "court_restruct": [],
    "cash_donation": []
   },
-  "002122": {
-   "investigation": [
-    {
-     "title": "关于收到《行政监管措施决定书》和《立案告知书》的公告",
-     "date": "2025-04-29",
-     "announcementId": "1223394913",
-     "adjunctUrl": "finalpage/2025-04-29/1223394913.pdf"
-    }
-   ],
-   "penalty": [
-    {
-     "title": "关于收到行政处罚决定书的公告",
-     "date": "2025-11-19",
-     "announcementId": "1224812570",
-     "adjunctUrl": "finalpage/2025-11-19/1224812570.PDF"
-    },
-    {
-     "title": "关于收到行政处罚事先告知书的公告",
-     "date": "2025-10-30",
-     "announcementId": "1224768535",
-     "adjunctUrl": "finalpage/2025-10-30/1224768535.PDF"
-    }
-   ],
-   "warning": [],
-   "audit_adverse": [],
-   "audit_qualified": [],
-   "audit_emphasis": [],
-   "freeze": [],
-   "consume_limit": [],
-   "restructuring": [],
-   "asset_sale": [],
-   "debt_waiver": [
-    {
-     "title": "关于债务重组暨继续向参股公司提供财务资助的关联交易公告",
-     "date": "2025-11-29",
-     "announcementId": "1224834042",
-     "adjunctUrl": "finalpage/2025-11-29/1224834042.PDF"
-    }
-   ],
-   "donation": [],
-   "ic_adverse": [],
-   "court_restruct": [],
-   "cash_donation": []
-  },
   "002168": {
    "investigation": [],
    "penalty": [],
@@ -4702,48 +4823,6 @@
      "date": "2024-12-11",
      "announcementId": "1221983035",
      "adjunctUrl": "finalpage/2024-12-11/1221983035.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "江西合力泰科技有限公司重整计划（草案）",
-     "date": "2024-12-07",
-     "announcementId": "1221958762",
-     "adjunctUrl": "finalpage/2024-12-07/1221958762.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "合力泰科技股份有限公司重整计划（草案）",
-     "date": "2024-12-07",
-     "announcementId": "1221958759",
-     "adjunctUrl": "finalpage/2024-12-07/1221958759.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "合力泰科技股份有限公司重整计划（草案）之出资人权益调整方案",
-     "date": "2024-12-07",
-     "announcementId": "1221958758",
-     "adjunctUrl": "finalpage/2024-12-07/1221958758.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "关于公司及子公司重整债权申报暨召开债权人会议的公告",
-     "date": "2024-11-30",
-     "announcementId": "1221893192",
-     "adjunctUrl": "finalpage/2024-11-30/1221893192.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "中国国际金融股份有限公司关于重整投资人受让合力泰科技股份有限公司资本公积转增股份价格的专项意见",
-     "date": "2024-11-30",
-     "announcementId": "1221893190",
-     "adjunctUrl": "finalpage/2024-11-30/1221893190.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "关于与重整财务投资人签署《重整投资协议》的公告",
-     "date": "2024-11-30",
-     "announcementId": "1221893189",
-     "adjunctUrl": "finalpage/2024-11-30/1221893189.PDF",
      "stage": "early"
     }
    ],
@@ -6031,6 +6110,12 @@
    ],
    "penalty": [
     {
+     "title": "关于公司及相关当事人收到《行政处罚决定书》的公告",
+     "date": "2026-11-28",
+     "announcementId": "1225693575",
+     "adjunctUrl": "finalpage/2026-11-28/1225693575.PDF"
+    },
+    {
      "title": "关于公司及相关当事人收到《行政处罚事先告知书》的公告",
      "date": "2026-07-18",
      "announcementId": "1225430572",
@@ -6087,6 +6172,18 @@
    ],
    "freeze": [
     {
+     "title": "关于持股5%以上股东部分股份被司法再冻结的公告",
+     "date": "2026-11-27",
+     "announcementId": "1225690676",
+     "adjunctUrl": "finalpage/2026-11-27/1225690676.PDF"
+    },
+    {
+     "title": "关于子公司股权被冻结的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682616",
+     "adjunctUrl": "finalpage/2026-11-21/1225682616.PDF"
+    },
+    {
      "title": "关于子公司股权被冻结的公告",
      "date": "2025-12-31",
      "announcementId": "1224911048",
@@ -6131,6 +6228,20 @@
    ],
    "consume_limit": [],
    "restructuring": [
+    {
+     "title": "关于公司及全资子公司英飞拓仁用重整债权申报及召开债权人会议通知的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225689118",
+     "adjunctUrl": "finalpage/2026-11-26/1225689118.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于法院裁定受理公司及全资子公司英飞拓仁用重整并指定管理人暨公司股票交易被叠加实施退市风险警示的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225689117",
+     "adjunctUrl": "finalpage/2026-11-26/1225689117.PDF",
+     "stage": "early"
+    },
     {
      "title": "关于签署《厦门信托-英飞拓重整服务信托信托合同》的公告",
      "date": "2026-11-18",
@@ -6204,6 +6315,144 @@
    ],
    "asset_sale": [
     {
+     "title": "关于重大资产重组的进展暨本次交易获得控股股东同意的公告",
+     "date": "2026-11-28",
+     "announcementId": "1225693576",
+     "adjunctUrl": "finalpage/2026-11-28/1225693576.PDF"
+    },
+    {
+     "title": "重大资产出售报告书（草案）与预案差异对比说明",
+     "date": "2026-11-24",
+     "announcementId": "1225685105",
+     "adjunctUrl": "finalpage/2026-11-24/1225685105.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于本次交易不构成《上市公司重大资产重组管理办法》第十三条规定的重组上市情形的核查意见",
+     "date": "2026-11-24",
+     "announcementId": "1225685102",
+     "adjunctUrl": "finalpage/2026-11-24/1225685102.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司担任深圳英飞拓科技股份有限公司重大资产出售项目之独立财务顾问的承诺函",
+     "date": "2026-11-24",
+     "announcementId": "1225685100",
+     "adjunctUrl": "finalpage/2026-11-24/1225685100.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于本次交易相关主体不存在《上市公司监管指引第7号——上市公司重大资产重组相关股票异常交易监管》第十二条及《深圳证券交易所上市公司自律监管指引第8号——重大资产重组》第三十条规定的不得参与上市公司重大资产重组情形的核查意见",
+     "date": "2026-11-24",
+     "announcementId": "1225685099",
+     "adjunctUrl": "finalpage/2026-11-24/1225685099.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于不存在《上市公司监管指引第7号——上市公司重大资产重组相关股票异常交易监管》第十二条不得参与任何上市公司重大资产重组情形的说明",
+     "date": "2026-11-24",
+     "announcementId": "1225685098",
+     "adjunctUrl": "finalpage/2026-11-24/1225685098.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于本次交易符合《上市公司监管指引第9号——上市公司筹划和实施重大资产重组的监管要求》第四条规定的核查意见",
+     "date": "2026-11-24",
+     "announcementId": "1225685096",
+     "adjunctUrl": "finalpage/2026-11-24/1225685096.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于深圳英飞拓科技股份有限公司本次重大资产重组内幕信息知情人登记制度的制定和执行情况的核查意见",
+     "date": "2026-11-24",
+     "announcementId": "1225685093",
+     "adjunctUrl": "finalpage/2026-11-24/1225685093.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于深圳英飞拓科技股份有限公司本次重大资产重组对上市公司即期回报影响情况及防范和填补即期回报被摊薄措施的核查意见",
+     "date": "2026-11-24",
+     "announcementId": "1225685092",
+     "adjunctUrl": "finalpage/2026-11-24/1225685092.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于深圳英飞拓科技股份有限公司本次重大资产重组前业绩异常或存在拟置出资产情形的相关事项之专项核查意见",
+     "date": "2026-11-24",
+     "announcementId": "1225685091",
+     "adjunctUrl": "finalpage/2026-11-24/1225685091.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于重大资产重组报告书援引本公司出具的结论性意见的同意书",
+     "date": "2026-11-24",
+     "announcementId": "1225685090",
+     "adjunctUrl": "finalpage/2026-11-24/1225685090.PDF"
+    },
+    {
+     "title": "北京市通商律师事务所关于深圳英飞拓科技股份有限公司重大资产重组前业绩异常或存在拟置出资产情形的专项核查意见",
+     "date": "2026-11-24",
+     "announcementId": "1225685089",
+     "adjunctUrl": "finalpage/2026-11-24/1225685089.PDF"
+    },
+    {
+     "title": "董事会关于本次重大资产重组摊薄即期回报情况及填补措施的说明",
+     "date": "2026-11-24",
+     "announcementId": "1225685084",
+     "adjunctUrl": "finalpage/2026-11-24/1225685084.PDF"
+    },
+    {
+     "title": "董事会关于本次交易相关主体不存在《上市公司监管指引第7号——上市公司重大资产重组相关股票异常交易监管》第十二条及《深圳证券交易所上市公司自律监管指引第8号——重大资产重组》第三十条规定的不得参与上市公司重大资产重组的情形的说明",
+     "date": "2026-11-24",
+     "announcementId": "1225685079",
+     "adjunctUrl": "finalpage/2026-11-24/1225685079.PDF"
+    },
+    {
+     "title": "董事会关于本次交易符合《上市公司监管指引第9号——上市公司筹划和实施重大资产重组的监管要求》第四条规定的说明",
+     "date": "2026-11-24",
+     "announcementId": "1225685077",
+     "adjunctUrl": "finalpage/2026-11-24/1225685077.PDF"
+    },
+    {
+     "title": "董事会关于本次交易符合《上市公司重大资产重组管理办法》第十一条规定及不适用第四十三条、第四十四条规定的说明",
+     "date": "2026-11-24",
+     "announcementId": "1225685076",
+     "adjunctUrl": "finalpage/2026-11-24/1225685076.PDF"
+    },
+    {
+     "title": "董事会关于本次交易构成重大资产重组、不构成《上市公司重大资产重组管理办法》第十三条规定的重组上市的说明",
+     "date": "2026-11-24",
+     "announcementId": "1225685075",
+     "adjunctUrl": "finalpage/2026-11-24/1225685075.PDF"
+    },
+    {
+     "title": "国众联资产评估土地房地产估价有限公司关于深圳英飞拓科技股份有限公司本次重大资产重组前业绩异常或存在拟置出资产情形的相关事项之专项核查意见",
+     "date": "2026-11-24",
+     "announcementId": "1225685070",
+     "adjunctUrl": "finalpage/2026-11-24/1225685070.PDF"
+    },
+    {
+     "title": "北京市通商律师事务所关于深圳英飞拓科技股份有限公司重大资产出售的法律意见书",
+     "date": "2026-11-24",
+     "announcementId": "1225685064",
+     "adjunctUrl": "finalpage/2026-11-24/1225685064.PDF"
+    },
+    {
+     "title": "万联证券股份有限公司关于深圳英飞拓科技股份有限公司重大资产出售之独立财务顾问报告",
+     "date": "2026-11-24",
+     "announcementId": "1225685063",
+     "adjunctUrl": "finalpage/2026-11-24/1225685063.PDF"
+    },
+    {
+     "title": "关于本次重大资产重组的一般风险提示性公告",
+     "date": "2026-11-24",
+     "announcementId": "1225685062",
+     "adjunctUrl": "finalpage/2026-11-24/1225685062.PDF"
+    },
+    {
+     "title": "重大资产出售报告书（草案）摘要",
+     "date": "2026-11-24",
+     "announcementId": "1225685061",
+     "adjunctUrl": "finalpage/2026-11-24/1225685061.PDF"
+    },
+    {
+     "title": "重大资产出售报告书（草案）",
+     "date": "2026-11-24",
+     "announcementId": "1225685060",
+     "adjunctUrl": "finalpage/2026-11-24/1225685060.PDF"
+    },
+    {
      "title": "董事会关于本次交易相关主体不存在《上市公司监管指引第7号——上市公司重大资产重组相关股票异常交易监管》第十二条及《深圳证券交易所上市公司自律监管指引第8号——重大资产重组》第三十条规定的不得参与上市公司重大资产重组的情形的说明",
      "date": "2026-11-05",
      "announcementId": "1225658382",
@@ -6262,7 +6511,17 @@
    ],
    "donation": [],
    "ic_adverse": [],
-   "court_restruct": [],
+   "court_restruct": [
+    {
+     "title": "关于法院裁定受理公司及全资子公司英飞拓仁用重整并指定管理人暨公司股票交易被叠加实施退市风险警示的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225689117",
+     "adjunctUrl": "finalpage/2026-11-26/1225689117.PDF",
+     "stage": "early",
+     "needs_pdf": false,
+     "pdf_verified": true
+    }
+   ],
    "cash_donation": []
   },
   "002538": {
@@ -6840,6 +7099,27 @@
    "consume_limit": [],
    "restructuring": [
     {
+     "title": "关于法院同意公司在重整期间继续营业及自行管理财产和营业事务的公告",
+     "date": "2026-11-27",
+     "announcementId": "1225691024",
+     "adjunctUrl": "finalpage/2026-11-27/1225691024.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于公司重整债权申报及召开债权人会议通知的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682071",
+     "adjunctUrl": "finalpage/2026-11-21/1225682071.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于法院裁定受理公司重整及指定管理人暨公司股票交易被叠加实施退市风险警示的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682070",
+     "adjunctUrl": "finalpage/2026-11-21/1225682070.PDF",
+     "stage": "early"
+    },
+    {
      "title": "关于收到公司重整产业投资人承诺函的公告",
      "date": "2026-10-30",
      "announcementId": "1225646013",
@@ -6900,7 +7180,17 @@
    "debt_waiver": [],
    "donation": [],
    "ic_adverse": [],
-   "court_restruct": [],
+   "court_restruct": [
+    {
+     "title": "关于法院裁定受理公司重整及指定管理人暨公司股票交易被叠加实施退市风险警示的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682070",
+     "adjunctUrl": "finalpage/2026-11-21/1225682070.PDF",
+     "stage": "early",
+     "needs_pdf": false,
+     "pdf_verified": true
+    }
+   ],
    "cash_donation": []
   },
   "002630": {
@@ -7101,30 +7391,6 @@
      "date": "2025-01-04",
      "announcementId": "1222224214",
      "adjunctUrl": "finalpage/2025-01-04/1222224214.PDF"
-    },
-    {
-     "title": "关于子公司股权被冻结的公告（补充后）",
-     "date": "2024-12-07",
-     "announcementId": "1221955984",
-     "adjunctUrl": "finalpage/2024-12-07/1221955984.PDF"
-    },
-    {
-     "title": "关于子公司股权被冻结的补充公告",
-     "date": "2024-12-07",
-     "announcementId": "1221955983",
-     "adjunctUrl": "finalpage/2024-12-07/1221955983.PDF"
-    },
-    {
-     "title": "关于子公司股权被冻结的进展公告",
-     "date": "2024-12-05",
-     "announcementId": "1221927359",
-     "adjunctUrl": "finalpage/2024-12-05/1221927359.PDF"
-    },
-    {
-     "title": "关于子公司股权被冻结的公告",
-     "date": "2024-12-04",
-     "announcementId": "1221918629",
-     "adjunctUrl": "finalpage/2024-12-04/1221918629.PDF"
     }
    ],
    "consume_limit": [],
@@ -7996,6 +8262,13 @@
    "restructuring": [
     {
      "title": "关于与重整投资人签署《重整投资协议》的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682219",
+     "adjunctUrl": "finalpage/2026-11-21/1225682219.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于与重整投资人签署《重整投资协议》的公告",
      "date": "2026-10-27",
      "announcementId": "1225626289",
      "adjunctUrl": "finalpage/2026-10-27/1225626289.PDF",
@@ -8577,12 +8850,6 @@
      "date": "2024-12-26",
      "announcementId": "1222142398",
      "adjunctUrl": "finalpage/2024-12-26/1222142398.PDF"
-    },
-    {
-     "title": "关于持股5%以上股东所持部分股份将被司法拍卖及全部股份被轮候冻结的提示性公告",
-     "date": "2024-12-04",
-     "announcementId": "1221917333",
-     "adjunctUrl": "finalpage/2024-12-04/1221917333.PDF"
     }
    ],
    "consume_limit": [],
@@ -8896,20 +9163,6 @@
      "announcementId": "1222183239",
      "adjunctUrl": "finalpage/2024-12-31/1222183239.PDF",
      "stage": "early"
-    },
-    {
-     "title": "关于公开招募和遴选重整投资人的公告",
-     "date": "2024-12-03",
-     "announcementId": "1221908654",
-     "adjunctUrl": "finalpage/2024-12-03/1221908654.PDF",
-     "stage": "early"
-    },
-    {
-     "title": "关于被债权人申请重整及预重整的进展公告",
-     "date": "2024-11-30",
-     "announcementId": "1221891195",
-     "adjunctUrl": "finalpage/2024-11-30/1221891195.PDF",
-     "stage": "early"
     }
    ],
    "asset_sale": [],
@@ -8989,93 +9242,6 @@
      "adjunctUrl": "finalpage/2025-12-27/1224902074.PDF"
     }
    ],
-   "donation": [],
-   "ic_adverse": [],
-   "court_restruct": [],
-   "cash_donation": []
-  },
-  "002872": {
-   "investigation": [
-    {
-     "title": "关于公司及控股股东、实际控制人收到中国证券监督管理委员会立案告知书的公告",
-     "date": "2025-01-09",
-     "announcementId": "1222271744",
-     "adjunctUrl": "finalpage/2025-01-09/1222271744.PDF"
-    }
-   ],
-   "penalty": [
-    {
-     "title": "关于收到中国证券监督管理委员会重庆监管局《行政处罚决定书》的公告",
-     "date": "2025-11-08",
-     "announcementId": "1224793919",
-     "adjunctUrl": "finalpage/2025-11-08/1224793919.PDF"
-    },
-    {
-     "title": "关于收到中国证券监督管理委员会重庆监管局《行政处罚事先告知书》的公告",
-     "date": "2025-09-13",
-     "announcementId": "1224658853",
-     "adjunctUrl": "finalpage/2025-09-13/1224658853.PDF"
-    }
-   ],
-   "warning": [],
-   "audit_adverse": [],
-   "audit_qualified": [
-    {
-     "title": "关于天圣制药集团股份有限公司2024年度保留意见涉及事项影响已消除的审核报告",
-     "date": "2026-04-29",
-     "announcementId": "1225249856",
-     "adjunctUrl": "finalpage/2026-04-29/1225249856.PDF"
-    },
-    {
-     "title": "董事会关于2024年度审计报告保留意见涉及事项影响已消除的专项说明",
-     "date": "2026-04-29",
-     "announcementId": "1225249851",
-     "adjunctUrl": "finalpage/2026-04-29/1225249851.PDF"
-    },
-    {
-     "title": "审计委员会对董事会关于2024年度审计报告保留意见涉及事项影响已消除的专项说明的意见",
-     "date": "2026-04-29",
-     "announcementId": "1225249850",
-     "adjunctUrl": "finalpage/2026-04-29/1225249850.PDF"
-    },
-    {
-     "title": "董事会关于公司2024年度保留意见审计报告涉及事项的专项说明",
-     "date": "2025-04-29",
-     "announcementId": "1223373736",
-     "adjunctUrl": "finalpage/2025-04-29/1223373736.PDF"
-    },
-    {
-     "title": "监事会对董事会关于2024年度保留意见审计报告涉及事项的专项说明的意见",
-     "date": "2025-04-29",
-     "announcementId": "1223373711",
-     "adjunctUrl": "finalpage/2025-04-29/1223373711.PDF"
-    }
-   ],
-   "audit_emphasis": [],
-   "freeze": [
-    {
-     "title": "关于控股股东所持公司部分股份被法院强制执行暨解除冻结的公告",
-     "date": "2026-10-20",
-     "announcementId": "1225610718",
-     "adjunctUrl": "finalpage/2026-10-20/1225610718.PDF"
-    },
-    {
-     "title": "关于控股股东所持公司部分股份解除司法冻结的公告",
-     "date": "2026-07-07",
-     "announcementId": "1225412369",
-     "adjunctUrl": "finalpage/2026-07-07/1225412369.PDF"
-    },
-    {
-     "title": "关于公司控股股东部分股份被冻结的公告",
-     "date": "2025-12-16",
-     "announcementId": "1224877569",
-     "adjunctUrl": "finalpage/2025-12-16/1224877569.PDF"
-    }
-   ],
-   "consume_limit": [],
-   "restructuring": [],
-   "asset_sale": [],
-   "debt_waiver": [],
    "donation": [],
    "ic_adverse": [],
    "court_restruct": [],
@@ -9774,6 +9940,12 @@
    ],
    "audit_emphasis": [],
    "freeze": [
+    {
+     "title": "关于新增累计诉讼、仲裁案件及诉讼事项进展和部分银行账户被冻结的公告",
+     "date": "2026-11-27",
+     "announcementId": "1225692008",
+     "adjunctUrl": "finalpage/2026-11-27/1225692008.PDF"
+    },
     {
      "title": "关于新增累计诉讼、仲裁案件及诉讼事项进展、部分银行账户冻结和部分债务逾期情况的公告",
      "date": "2026-11-06",
@@ -10689,6 +10861,13 @@
    "consume_limit": [],
    "restructuring": [
     {
+     "title": "关于确定重整投资人暨与重整投资人签署《重整投资协议》的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225691182",
+     "adjunctUrl": "finalpage/2026-11-26/1225691182.PDF",
+     "stage": "early"
+    },
+    {
      "title": "关于公司重整债权申报通知及召开债权人会议的公告",
      "date": "2026-11-20",
      "announcementId": "1225680315",
@@ -10988,14 +11167,7 @@
    "cash_donation": []
   },
   "300173": {
-   "investigation": [
-    {
-     "title": "关于收到中国证券监督管理委员会《立案告知书》的公告",
-     "date": "2024-12-06",
-     "announcementId": "1221958448",
-     "adjunctUrl": "finalpage/2024-12-06/1221958448.PDF"
-    }
-   ],
+   "investigation": [],
    "penalty": [
     {
      "title": "关于收到中国证券监督管理委员会广东监管局《行政处罚决定书》的公告",
@@ -11143,6 +11315,13 @@
     }
    ],
    "restructuring": [
+    {
+     "title": "关于预重整阶段债权人组表决情况的公告",
+     "date": "2026-11-20",
+     "announcementId": "1225681969",
+     "adjunctUrl": "finalpage/2026-11-20/1225681969.PDF",
+     "stage": "early"
+    },
     {
      "title": "关于预重整方案及相关议案表决延期的公告",
      "date": "2026-11-12",
@@ -11484,6 +11663,41 @@
    "consume_limit": [],
    "restructuring": [
     {
+     "title": "北京易华录信息技术股份有限公司重整计划草案",
+     "date": "2026-11-27",
+     "announcementId": "1225693182",
+     "adjunctUrl": "finalpage/2026-11-27/1225693182.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于法院许可公司在重整期间继续营业及自行管理财产和营业事务的公告",
+     "date": "2026-11-27",
+     "announcementId": "1225693181",
+     "adjunctUrl": "finalpage/2026-11-27/1225693181.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "北京易华录信息技术股份有限公司重整计划草案之经营方案",
+     "date": "2026-11-27",
+     "announcementId": "1225693183",
+     "adjunctUrl": "finalpage/2026-11-27/1225693183.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "关于公司重整债权申报通知及召开债权人会议的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225689248",
+     "adjunctUrl": "finalpage/2026-11-25/1225689248.pdf",
+     "stage": "early"
+    },
+    {
+     "title": "关于法院裁定受理公司重整及指定管理人暨公司股票交易将被叠加实施退市风险警示的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225689247",
+     "adjunctUrl": "finalpage/2026-11-25/1225689247.pdf",
+     "stage": "early"
+    },
+    {
      "title": "关于公开选聘重整服务信托受托人的公告",
      "date": "2026-10-16",
      "announcementId": "1225609226",
@@ -11586,7 +11800,17 @@
    "debt_waiver": [],
    "donation": [],
    "ic_adverse": [],
-   "court_restruct": [],
+   "court_restruct": [
+    {
+     "title": "关于法院裁定受理公司重整及指定管理人暨公司股票交易将被叠加实施退市风险警示的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225689247",
+     "adjunctUrl": "finalpage/2026-11-25/1225689247.pdf",
+     "stage": "early",
+     "needs_pdf": false,
+     "pdf_verified": true
+    }
+   ],
    "cash_donation": []
   },
   "300245": {
@@ -11875,12 +12099,6 @@
      "date": "2026-02-25",
      "announcementId": "1224982959",
      "adjunctUrl": "finalpage/2026-02-25/1224982959.PDF"
-    },
-    {
-     "title": "关于控股股东、实际控制人之一致行动人所持股份被司法再冻结及轮候冻结的公告",
-     "date": "2024-12-03",
-     "announcementId": "1221905913",
-     "adjunctUrl": "finalpage/2024-12-03/1221905913.PDF"
     }
    ],
    "consume_limit": [],
@@ -12344,6 +12562,12 @@
    "debt_waiver": [],
    "donation": [
     {
+     "title": "关于接受实际控制人无偿担保事项的进展公告",
+     "date": "2026-11-27",
+     "announcementId": "1225692842",
+     "adjunctUrl": "finalpage/2026-11-27/1225692842.PDF"
+    },
+    {
      "title": "关于为子公司提供担保及接受实际控制人无偿担保事项的进展公告",
      "date": "2026-09-29",
      "announcementId": "1225587507",
@@ -12405,6 +12629,12 @@
    "audit_qualified": [],
    "audit_emphasis": [],
    "freeze": [
+    {
+     "title": "关于实际控制人部分股份解除冻结的公告",
+     "date": "2026-11-20",
+     "announcementId": "1225680788",
+     "adjunctUrl": "finalpage/2026-11-20/1225680788.PDF"
+    },
     {
      "title": "关于实际控制人部分股份司法冻结的公告",
      "date": "2026-10-14",
@@ -13214,6 +13444,76 @@
    "court_restruct": [],
    "cash_donation": []
   },
+  "300500": {
+   "investigation": [
+    {
+     "title": "关于收到中国证券监督管理委员会《立案告知书》的公告",
+     "date": "2025-12-31",
+     "announcementId": "1224913103",
+     "adjunctUrl": "finalpage/2025-12-31/1224913103.PDF"
+    }
+   ],
+   "penalty": [
+    {
+     "title": "关于收到中国证券监督管理委员会江苏监管局《行政处罚事先告知书》的公告",
+     "date": "2026-11-23",
+     "announcementId": "1225681840",
+     "adjunctUrl": "finalpage/2026-11-23/1225681840.PDF"
+    }
+   ],
+   "warning": [
+    {
+     "title": "关于收到江苏证监局警示函的公告",
+     "date": "2026-11-23",
+     "announcementId": "1225681841",
+     "adjunctUrl": "finalpage/2026-11-23/1225681841.PDF"
+    }
+   ],
+   "audit_adverse": [],
+   "audit_qualified": [
+    {
+     "title": "关于对启迪设计集团股份有限公司2025年度财务报表出具保留意见审计报告的专项说明",
+     "date": "2026-04-29",
+     "announcementId": "1225228849",
+     "adjunctUrl": "finalpage/2026-04-29/1225228849.PDF"
+    },
+    {
+     "title": "董事会关于公司2025年度保留意见审计报告涉及事项的专项说明",
+     "date": "2026-04-29",
+     "announcementId": "1225228848",
+     "adjunctUrl": "finalpage/2026-04-29/1225228848.PDF"
+    },
+    {
+     "title": "董事会关于公司2025年度带强调事项段的无保留意见内部控制审计报告涉及事项的专项说明",
+     "date": "2026-04-29",
+     "announcementId": "1225228847",
+     "adjunctUrl": "finalpage/2026-04-29/1225228847.PDF"
+    }
+   ],
+   "audit_emphasis": [],
+   "freeze": [
+    {
+     "title": "关于公司银行账户部分资金解除冻结的公告",
+     "date": "2026-10-28",
+     "announcementId": "1225630367",
+     "adjunctUrl": "finalpage/2026-10-28/1225630367.PDF"
+    },
+    {
+     "title": "关于公司银行账户部分资金被冻结的公告",
+     "date": "2026-02-13",
+     "announcementId": "1224981419",
+     "adjunctUrl": "finalpage/2026-02-13/1224981419.PDF"
+    }
+   ],
+   "consume_limit": [],
+   "restructuring": [],
+   "asset_sale": [],
+   "debt_waiver": [],
+   "donation": [],
+   "ic_adverse": [],
+   "court_restruct": [],
+   "cash_donation": []
+  },
   "300555": {
    "investigation": [],
    "penalty": [],
@@ -13401,6 +13701,77 @@
    "court_restruct": [],
    "cash_donation": []
   },
+  "300670": {
+   "investigation": [
+    {
+     "title": "关于收到中国证券监督管理委员会立案告知书的公告",
+     "date": "2025-12-26",
+     "announcementId": "1224900155",
+     "adjunctUrl": "finalpage/2025-12-26/1224900155.PDF"
+    }
+   ],
+   "penalty": [
+    {
+     "title": "关于收到《行政处罚事先告知书》的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225686833",
+     "adjunctUrl": "finalpage/2026-11-25/1225686833.PDF"
+    }
+   ],
+   "warning": [],
+   "audit_adverse": [],
+   "audit_qualified": [
+    {
+     "title": "关于对江苏大烨智能电气股份有限公司2025年度财务报表出具带有强调事项段的无保留意见审计报告的专项说明",
+     "date": "2026-04-27",
+     "announcementId": "1225191080",
+     "adjunctUrl": "finalpage/2026-04-27/1225191080.PDF"
+    },
+    {
+     "title": "董事会关于公司2025年度带强调事项段的无保留意见审计报告的专项说明",
+     "date": "2026-04-27",
+     "announcementId": "1225191079",
+     "adjunctUrl": "finalpage/2026-04-27/1225191079.PDF"
+    }
+   ],
+   "audit_emphasis": [],
+   "freeze": [
+    {
+     "title": "关于公司银行账户部分资金被冻结的公告",
+     "date": "2026-11-19",
+     "announcementId": "1225679427",
+     "adjunctUrl": "finalpage/2026-11-19/1225679427.PDF"
+    }
+   ],
+   "consume_limit": [],
+   "restructuring": [],
+   "asset_sale": [
+    {
+     "title": "东北证券股份有限公司关于江苏大烨智能电气股份有限公司重大资产购买暨关联交易之2024年度持续督导意见暨持续督导总结报告",
+     "date": "2025-05-06",
+     "announcementId": "1223475052",
+     "adjunctUrl": "finalpage/2025-05-06/1223475052.PDF"
+    }
+   ],
+   "debt_waiver": [],
+   "donation": [
+    {
+     "title": "关于接受实际控制人无偿担保暨关联交易的公告",
+     "date": "2026-04-27",
+     "announcementId": "1225191087",
+     "adjunctUrl": "finalpage/2026-04-27/1225191087.PDF"
+    },
+    {
+     "title": "关于接受实际控制人无偿担保暨关联交易的公告",
+     "date": "2025-04-25",
+     "announcementId": "1223270540",
+     "adjunctUrl": "finalpage/2025-04-25/1223270540.PDF"
+    }
+   ],
+   "ic_adverse": [],
+   "court_restruct": [],
+   "cash_donation": []
+  },
   "300716": {
    "investigation": [
     {
@@ -13532,6 +13903,13 @@
    ],
    "consume_limit": [],
    "restructuring": [
+    {
+     "title": "关于收到法院延长预重整期限决定书的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225686835",
+     "adjunctUrl": "finalpage/2026-11-25/1225686835.PDF",
+     "stage": "early"
+    },
     {
      "title": "关于签署《预重整投资协议之补充协议》的公告",
      "date": "2026-11-20",
@@ -13786,7 +14164,14 @@
      "adjunctUrl": "finalpage/2026-05-20/1225316979.PDF"
     }
    ],
-   "penalty": [],
+   "penalty": [
+    {
+     "title": "关于收到《行政处罚事先告知书》的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682080",
+     "adjunctUrl": "finalpage/2026-11-21/1225682080.PDF"
+    }
+   ],
    "warning": [],
    "audit_adverse": [
     {
@@ -14036,12 +14421,6 @@
      "date": "2024-12-26",
      "announcementId": "1222141994",
      "adjunctUrl": "finalpage/2024-12-26/1222141994.PDF"
-    },
-    {
-     "title": "人福医药关于控股股东持有股份被解除冻结的公告",
-     "date": "2024-12-07",
-     "announcementId": "1221954727",
-     "adjunctUrl": "finalpage/2024-12-07/1221954727.PDF"
     }
    ],
    "consume_limit": [],
@@ -16046,6 +16425,41 @@
    "consume_limit": [],
    "restructuring": [
     {
+     "title": "华夏幸福基业股份有限公司关于法院准许相关主体在重整期间继续营业并自行管理财产和营业事务的公告",
+     "date": "2026-11-27",
+     "announcementId": "1225691059",
+     "adjunctUrl": "finalpage/2026-11-27/1225691059.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "华夏幸福基业股份有限公司关于法院裁定受理廊坊京御及关联公司实质合并重整并指定管理人的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225689251",
+     "adjunctUrl": "finalpage/2026-11-26/1225689251.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "华夏幸福基业股份有限公司关于法院裁定受理公司重整并指定管理人暨股票被叠加实施退市风险警示的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225689250",
+     "adjunctUrl": "finalpage/2026-11-26/1225689250.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "华夏幸福基业股份有限公司关于公司及六家子公司重整债权申报的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225689249",
+     "adjunctUrl": "finalpage/2026-11-26/1225689249.PDF",
+     "stage": "early"
+    },
+    {
+     "title": "华夏幸福基业股份有限公司关于公司子公司被债权人申请重整及预重整暨法院受理子公司预重整并指定临时管理人的公告",
+     "date": "2026-11-24",
+     "announcementId": "1225684969",
+     "adjunctUrl": "finalpage/2026-11-24/1225684969.PDF",
+     "stage": "early"
+    },
+    {
      "title": "华夏幸福基业股份有限公司关于与产业投资人签署《重整投资协议》的公告",
      "date": "2026-09-29",
      "announcementId": "1225586286",
@@ -16251,6 +16665,12 @@
    "debt_waiver": [
     {
      "title": "华夏幸福基业股份有限公司关于债务重组进展等事项的公告",
+     "date": "2026-11-28",
+     "announcementId": "1225692798",
+     "adjunctUrl": "finalpage/2026-11-28/1225692798.PDF"
+    },
+    {
+     "title": "华夏幸福基业股份有限公司关于债务重组进展等事项的公告",
      "date": "2026-10-24",
      "announcementId": "1225620105",
      "adjunctUrl": "finalpage/2026-10-24/1225620105.PDF"
@@ -16398,6 +16818,33 @@
    "ic_adverse": [],
    "court_restruct": [
     {
+     "title": "华夏幸福基业股份有限公司关于法院裁定受理廊坊京御及关联公司实质合并重整并指定管理人的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225689251",
+     "adjunctUrl": "finalpage/2026-11-26/1225689251.PDF",
+     "stage": "early",
+     "needs_pdf": false,
+     "pdf_verified": true
+    },
+    {
+     "title": "华夏幸福基业股份有限公司关于法院裁定受理公司重整并指定管理人暨股票被叠加实施退市风险警示的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225689250",
+     "adjunctUrl": "finalpage/2026-11-26/1225689250.PDF",
+     "stage": "early",
+     "needs_pdf": false,
+     "pdf_verified": true
+    },
+    {
+     "title": "华夏幸福基业股份有限公司关于公司子公司被债权人申请重整及预重整暨法院受理子公司预重整并指定临时管理人的公告",
+     "date": "2026-11-24",
+     "announcementId": "1225684969",
+     "adjunctUrl": "finalpage/2026-11-24/1225684969.PDF",
+     "stage": "early",
+     "needs_pdf": false,
+     "pdf_verified": true
+    },
+    {
      "title": "华夏幸福关于公司被债权人申请预重整及重整暨法院受理公司预重整的公告",
      "date": "2025-11-17",
      "announcementId": "1224808413",
@@ -16444,6 +16891,12 @@
    ],
    "audit_emphasis": [],
    "freeze": [
+    {
+     "title": "关于参股公司部分股权被冻结的公告",
+     "date": "2026-11-26",
+     "announcementId": "1225687757",
+     "adjunctUrl": "finalpage/2026-11-26/1225687757.PDF"
+    },
     {
      "title": "关于子公司、参股公司部分股权被冻结的公告",
      "date": "2026-11-05",
@@ -16683,44 +17136,6 @@
      "adjunctUrl": "finalpage/2026-04-29/1225233255.PDF"
     }
    ],
-   "court_restruct": [],
-   "cash_donation": []
-  },
-  "600381": {
-   "investigation": [],
-   "penalty": [
-    {
-     "title": "青海春天收到《行政处罚决定书》的公告",
-     "date": "2024-12-31",
-     "announcementId": "1222180952",
-     "adjunctUrl": "finalpage/2024-12-31/1222180952.PDF"
-    }
-   ],
-   "warning": [
-    {
-     "title": "青海春天关于收到中国证券监督管理委员会青海监管局警示函的公告",
-     "date": "2025-05-24",
-     "announcementId": "1223645457",
-     "adjunctUrl": "finalpage/2025-05-24/1223645457.PDF"
-    }
-   ],
-   "audit_adverse": [],
-   "audit_qualified": [
-    {
-     "title": "政旦志远（深圳）会计师事务所（特殊普通合伙）关于青海春天出具带强调事项段的无保留意见涉及事项影响已消除的审核报告",
-     "date": "2025-08-28",
-     "announcementId": "1224590612",
-     "adjunctUrl": "finalpage/2025-08-28/1224590612.PDF"
-    }
-   ],
-   "audit_emphasis": [],
-   "freeze": [],
-   "consume_limit": [],
-   "restructuring": [],
-   "asset_sale": [],
-   "debt_waiver": [],
-   "donation": [],
-   "ic_adverse": [],
    "court_restruct": [],
    "cash_donation": []
   },
@@ -16969,14 +17384,7 @@
      "adjunctUrl": "finalpage/2026-08-01/1225452477.PDF"
     }
    ],
-   "warning": [
-    {
-     "title": "关于公司收到上海证监局警示函的公告",
-     "date": "2024-12-04",
-     "announcementId": "1221919877",
-     "adjunctUrl": "finalpage/2024-12-04/1221919877.PDF"
-    }
-   ],
+   "warning": [],
    "audit_adverse": [],
    "audit_qualified": [
     {
@@ -18177,6 +18585,12 @@
   },
   "600759": {
    "investigation": [
+    {
+     "title": "洲际油气股份有限公司关于收到中国证监会《立案告知书》的公告",
+     "date": "2026-11-23",
+     "announcementId": "1225682859",
+     "adjunctUrl": "finalpage/2026-11-23/1225682859.PDF"
+    },
     {
      "title": "洲际油气股份有限公司关于公司股东收到中国证监会立案告知书的公告",
      "date": "2025-11-08",
@@ -20842,14 +21256,7 @@
   "603557": {
    "investigation": [],
    "penalty": [],
-   "warning": [
-    {
-     "title": "ST起步：关于收到浙江证监局警示函的公告",
-     "date": "2024-12-07",
-     "announcementId": "1221958683",
-     "adjunctUrl": "finalpage/2024-12-07/1221958683.PDF"
-    }
-   ],
+   "warning": [],
    "audit_adverse": [],
    "audit_qualified": [
     {
@@ -20886,6 +21293,12 @@
     }
    ],
    "freeze": [
+    {
+     "title": "*ST起步：关于公司部分银行账户资金被冻结的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225685856",
+     "adjunctUrl": "finalpage/2026-11-25/1225685856.PDF"
+    },
     {
      "title": "ST起步：关于控股股东股份被司法冻结的公告",
      "date": "2025-11-15",
@@ -20935,50 +21348,6 @@
      "adjunctUrl": "finalpage/2025-11-29/1224835682.PDF"
     }
    ],
-   "ic_adverse": [],
-   "court_restruct": [],
-   "cash_donation": []
-  },
-  "603595": {
-   "investigation": [
-    {
-     "title": "东尼电子关于公司收到中国证券监督管理委员会立案告知书的公告",
-     "date": "2025-04-26",
-     "announcementId": "1223311289",
-     "adjunctUrl": "finalpage/2025-04-26/1223311289.PDF"
-    }
-   ],
-   "penalty": [
-    {
-     "title": "浙江东尼电子股份有限公司关于收到中国证券监督管理委员会浙江监管局《行政处罚决定书》的公告",
-     "date": "2025-11-13",
-     "announcementId": "1224800854",
-     "adjunctUrl": "finalpage/2025-11-13/1224800854.PDF"
-    },
-    {
-     "title": "东尼电子关于收到中国证券监督管理委员会浙江监管局《行政处罚事先告知书》的公告",
-     "date": "2025-10-30",
-     "announcementId": "1224764258",
-     "adjunctUrl": "finalpage/2025-10-30/1224764258.PDF"
-    }
-   ],
-   "warning": [
-    {
-     "title": "东尼电子关于公司及相关人员收到浙江证监局警示函的公告",
-     "date": "2024-12-07",
-     "announcementId": "1221956316",
-     "adjunctUrl": "finalpage/2024-12-07/1221956316.PDF"
-    }
-   ],
-   "audit_adverse": [],
-   "audit_qualified": [],
-   "audit_emphasis": [],
-   "freeze": [],
-   "consume_limit": [],
-   "restructuring": [],
-   "asset_sale": [],
-   "debt_waiver": [],
-   "donation": [],
    "ic_adverse": [],
    "court_restruct": [],
    "cash_donation": []
@@ -21276,6 +21645,12 @@
    ],
    "audit_emphasis": [],
    "freeze": [
+    {
+     "title": "华扬联众数字技术股份有限公司关于持股5%以上股东股份被轮候冻结的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225681934",
+     "adjunctUrl": "finalpage/2026-11-21/1225681934.PDF"
+    },
     {
      "title": "华扬联众数字技术股份有限公司关于持股5%以上股东股份被轮候冻结的公告",
      "date": "2026-10-28",
@@ -21780,12 +22155,6 @@
      "date": "2025-01-07",
      "announcementId": "1222244456",
      "adjunctUrl": "finalpage/2025-01-07/1222244456.PDF"
-    },
-    {
-     "title": "金鸿顺关于重大资产重组事项的进展公告",
-     "date": "2024-12-06",
-     "announcementId": "1221939412",
-     "adjunctUrl": "finalpage/2024-12-06/1221939412.PDF"
     }
    ],
    "debt_waiver": [],
@@ -22374,6 +22743,12 @@
    "audit_emphasis": [],
    "freeze": [
     {
+     "title": "关于持股5%以上股东所持公司股份被司法冻结的公告",
+     "date": "2026-11-25",
+     "announcementId": "1225686047",
+     "adjunctUrl": "finalpage/2026-11-25/1225686047.PDF"
+    },
+    {
      "title": "关于银行账户资金被冻结暨诉讼进展的公告",
      "date": "2026-11-07",
      "announcementId": "1225661783",
@@ -22537,7 +22912,14 @@
      "adjunctUrl": "finalpage/2026-05-30/1225339078.PDF"
     }
    ],
-   "penalty": [],
+   "penalty": [
+    {
+     "title": "关于公司收到中国证券监督管理委员会北京监管局《行政处罚事先告知书》的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225682501",
+     "adjunctUrl": "finalpage/2026-11-21/1225682501.PDF"
+    }
+   ],
    "warning": [],
    "audit_adverse": [],
    "audit_qualified": [],
@@ -23040,6 +23422,12 @@
     }
    ],
    "penalty": [
+    {
+     "title": "关于收到中国证券监督管理委员会上海监管局 《行政处罚决定书》的公告",
+     "date": "2026-11-21",
+     "announcementId": "1225680710",
+     "adjunctUrl": "finalpage/2026-11-21/1225680710.PDF"
+    },
     {
      "title": "关于收到中国证券监督管理委员会上海监管局《行政处罚事先告知书》的公告",
      "date": "2026-09-12",

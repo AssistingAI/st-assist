@@ -89,17 +89,17 @@ def fetch_deducted(code):
         if df.empty:
             return code, None, None
 
-        # 找最新报告期（2025-12-31）
-        latest = df[df['报告期'] == '2025-12-31']
-        if latest.empty:
-            latest = df[df['报告期'] == '2025-09-30']
-        if latest.empty:
-            df_sorted = df.sort_values('报告期', ascending=False)
-            latest = df_sorted.head(1)
-
-        row = latest.iloc[0]
-        deducted = row.get('扣非净利润', None)
-        return code, parse_cn_number(deducted), None
+        # 动态取最新报告期（不再硬编码2025；随财报季自动跟进，如2026-09-30三季报）
+        df_sorted = df.sort_values('报告期', ascending=False)
+        latest = df_sorted.head(1)
+        # 若最新一期扣非为空，往前找最近有值的一期（防止报告期切换期缺数）
+        deducted = None
+        for _, r in df_sorted.iterrows():
+            v = parse_cn_number(r.get('扣非净利润', None))
+            if v is not None:
+                deducted = v
+                break
+        return code, deducted, None
     except Exception as e:
         return code, None, None
 
